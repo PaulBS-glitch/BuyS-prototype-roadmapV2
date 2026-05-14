@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BuySooner Roadmap</title>
+  <style>
+    :root{--navy:#071f3a;--teal:#087a78;--muted:#64748b;--border:#d7e5e4;--pale:#eaf6f5;--paper:#f7fbfb;--white:#fff;--text:#1f2933}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:linear-gradient(180deg,#fff 0%,#f7fbfb 55%,#eef8f7 100%);padding:28px}
+    .toolbar{max-width:1120px;margin:0 auto 18px;display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--navy);font-weight:900}
+    .toolbar a,.toolbar button{border:0;border-radius:999px;padding:11px 16px;text-decoration:none;font-weight:900;font-size:13px;cursor:pointer}.toolbar a{background:#fff;color:var(--navy);border:1px solid var(--border)}.toolbar button{background:var(--teal);color:#fff}
+    #roadmap-root{max-width:1120px;margin:0 auto}
+    .empty{background:#fff;border:1px solid var(--border);border-radius:24px;padding:30px;box-shadow:0 18px 50px rgba(7,31,58,.08)}
+    .empty h1{margin:0 0 10px;color:var(--navy);font-size:34px;letter-spacing:-.04em}.empty p{margin:0;color:var(--muted);font-size:16px;line-height:1.5;font-weight:700}
+    @media print{body{background:#fff;padding:0}.toolbar{display:none}}
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <span>BuySooner Roadmap</span>
+    <div>
+      <a href="index.html">Back to prototype</a>
+      <button type="button" onclick="window.print()">Print / Save PDF</button>
+    </div>
+  </div>
+  <main id="roadmap-root">
+    <section class="empty">
+      <h1>No roadmap data found</h1>
+      <p>Complete the prototype first, then use the final roadmap action to capture the scenario and open this report.</p>
+    </section>
+  </main>
+  <script src="roadmap-data.js"></script>
+  <script src="roadmap-page1.js"></script>
+  <script>
+    const data = window.BSRoadmap && window.BSRoadmap.load ? window.BSRoadmap.load() : null;
+    if (data && window.renderRoadmapPage1) {
+      window.renderRoadmapPage1(data, document.getElementById('roadmap-root'));
+    }
+  </script>
+</body>
+</html>
