@@ -5843,7 +5843,14 @@ button:active { transform: scale(0.98); }
 <button class="primary" id="applyNowButton" type="button">Apply Now →</button>
 </section>
 
-<section class="save-card"><div><h4>Still comparing options?</h4><p>Save your roadmap and come back when you are ready.</p></div><button class="secondary" id="saveRoadmapButton" type="button">Save My Roadmap</button></section>
+<section class="save-card">
+  <div>
+    <h4>Still comparing options?</h4>
+    <p>Save your roadmap and come back when you are ready.</p>
+  </div>
+  <button class="secondary" id="saveRoadmapButton" type="button" onclick="BSRoadmap.captureAndOpenRoadmap()">Save My Roadmap</button>
+</section>
+
 <p class="final-disclaimer">This roadmap is an illustrative guide only. It is designed to help you understand how BuySooner could work for you. Any application, approval, property purchase, refinance or final outcome will depend on your circumstances, the property, lender requirements and BuySooner’s assessment.</p>
 </section>
 </div>
