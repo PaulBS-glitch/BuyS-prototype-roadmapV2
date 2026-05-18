@@ -451,3 +451,69 @@
     money
   };
 })();
+
+(function () {
+  function text(value) {
+    return String(value == null ? "" : value).trim();
+  }
+
+  function candidateName() {
+    try {
+      if (typeof scenario !== "undefined" && scenario) {
+        const preName = scenario.preApply && scenario.preApply.name;
+        const scenarioName = scenario.name;
+        if (text(preName)) return text(preName);
+        if (text(scenarioName)) return text(scenarioName);
+      }
+    } catch (_) {}
+
+    const preNameInput = document.getElementById("preName");
+    if (preNameInput && text(preNameInput.value)) return text(preNameInput.value);
+
+    const mainNameInput = document.getElementById("customerName");
+    if (mainNameInput && text(mainNameInput.value)) return text(mainNameInput.value);
+
+    const heading = document.getElementById("readyNextHeading");
+    if (heading && text(heading.textContent)) {
+      const match = heading.textContent.match(/^(.+?),\s+your personalised/i);
+      if (match && text(match[1])) return text(match[1]);
+    }
+
+    return "Your";
+  }
+
+  function patchReadyRoadmapCta() {
+    const saveCard = document.querySelector("#screenReady .save-card");
+    if (!saveCard) return;
+
+    const heading = saveCard.querySelector("h4");
+    const copy = saveCard.querySelector("p");
+    const button = document.getElementById("saveRoadmapButton") || saveCard.querySelector("button");
+    const name = candidateName();
+    const prefix = name === "Your" ? "Let's" : name + ", let's";
+
+    if (heading) heading.textContent = prefix + " look at your personalised Roadmap in more detail.";
+    if (copy) {
+      copy.textContent = "";
+      copy.style.display = "none";
+    }
+    if (button) button.textContent = "See My Roadmap";
+  }
+
+  function run() {
+    patchReadyRoadmapCta();
+    setTimeout(patchReadyRoadmapCta, 40);
+    setTimeout(patchReadyRoadmapCta, 250);
+  }
+
+  document.addEventListener("DOMContentLoaded", run);
+  document.addEventListener("input", run, true);
+  document.addEventListener("change", run, true);
+  document.addEventListener("click", run, true);
+
+  const observer = new MutationObserver(run);
+  observer.observe(document.documentElement, { childList: true, subtree: true, characterData: true });
+
+  run();
+  setTimeout(run, 500);
+})();
