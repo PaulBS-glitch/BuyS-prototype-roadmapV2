@@ -1,4 +1,9 @@
-/* BuySooner roadmap data capture layer */
+/* BuySooner roadmap data capture layer
+   Purpose:
+   - Capture prototype inputs into one clean roadmap data object.
+   - Persist that object for roadmap.html and future roadmap pages.
+*/
+
 (function () {
   const STORAGE_KEY = "BuySoonerRoadmapData";
 
@@ -133,6 +138,7 @@
     const buyerTypeRaw = checkedValue(["buyerSituation", "customerType", "buyerType", "journeyType", "ownershipStatus", "scenarioType"]) || firstExisting(["buyerSituation", "customerType", "buyerType", "journeyType", "ownershipStatus", "scenarioType"]);
     const propertyAddress = firstExisting(["address", "preAddress", "propertyAddress", "targetAddress", "targetPropertyAddress"]);
     const targetArea = firstExisting(["preSuburb", "targetSuburb", "targetArea", "suburb", "preferredSuburb", "targetLocation", "area"]);
+    const timelineYears = firstNumber(["timelineSelect", "upgTimelineSelect", "refinanceStartYear", "refiStartYear"]) || 3;
 
     const data = {
       capturedAt: new Date().toISOString(),
@@ -166,8 +172,8 @@
       },
       assumptions: {
         growthRate: firstNumber(["marketGrowthSelect", "upgMarketGrowthSelect", "growthRate", "marketGrowth", "projectedGrowth"]) || 0.05,
-        refinanceStartYear: firstNumber(["timelineSelect", "upgTimelineSelect", "refinanceStartYear", "refiStartYear"]) || 3,
-        refinanceEndYear: (firstNumber(["timelineSelect", "upgTimelineSelect", "refinanceStartYear", "refiStartYear"]) || 3) + 2,
+        refinanceStartYear: timelineYears,
+        refinanceEndYear: timelineYears + 2,
         refinanceTargetLvr: normaliseLvr(firstNumber(["refinanceTargetLvr", "targetLvr"]) || 0.8)
       },
       derived: {}
@@ -194,7 +200,7 @@
   function captureAndOpenRoadmap() {
     const data = saveRoadmapData();
     console.log("BuySoonerRoadmapData", data);
-    window.location.assign("roadmap.html");
+    window.location.href = "roadmap.html";
   }
 
   function captureAndPreview() {
@@ -204,74 +210,13 @@
     return data;
   }
 
-  window.BSRoadmap = { collect: collectRoadmapData, derive: calculateRoadmapDerived, save: saveRoadmapData, load: loadRoadmapData, captureAndOpenRoadmap, captureAndPreview, money };
-
-  function setTextIfDifferent(el, value) {
-    if (el && el.textContent !== value) el.textContent = value;
-  }
-
-  function candidateName() {
-    try {
-      if (typeof scenario !== "undefined" && scenario) {
-        if (scenario.preApply && text(scenario.preApply.name)) return text(scenario.preApply.name);
-        if (text(scenario.name)) return text(scenario.name);
-      }
-    } catch (_) {}
-    const preNameInput = byId("preName");
-    if (preNameInput && text(preNameInput.value)) return text(preNameInput.value);
-    const mainNameInput = byId("customerName");
-    if (mainNameInput && text(mainNameInput.value)) return text(mainNameInput.value);
-    const heading = byId("readyNextHeading");
-    if (heading && text(heading.textContent)) {
-      const match = heading.textContent.match(/^(.+?),\s+your personalised/i);
-      if (match && text(match[1])) return text(match[1]);
-    }
-    return "Your";
-  }
-
-  function patchReadyRoadmapCta() {
-    const saveCard = document.querySelector("#screenReady .save-card");
-    if (!saveCard) return;
-    const heading = saveCard.querySelector("h4");
-    const copy = saveCard.querySelector("p");
-    const button = byId("saveRoadmapButton") || saveCard.querySelector("button");
-    const name = candidateName();
-    const prefix = name === "Your" ? "Let's" : name + ", let's";
-
-    setTextIfDifferent(heading, prefix + " look at your personalised Roadmap in more detail.");
-    if (copy) {
-      setTextIfDifferent(copy, "");
-      copy.style.display = "none";
-    }
-    setTextIfDifferent(button, "See My Roadmap");
-
-    if (button && !button.dataset.bsRoadmapOpenBound) {
-      button.dataset.bsRoadmapOpenBound = "1";
-      button.addEventListener("click", function (event) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        captureAndOpenRoadmap();
-      }, true);
-    }
-  }
-
-  function schedulePatch() {
-    patchReadyRoadmapCta();
-    setTimeout(patchReadyRoadmapCta, 50);
-    setTimeout(patchReadyRoadmapCta, 250);
-  }
-
-  document.addEventListener("DOMContentLoaded", schedulePatch);
-  document.addEventListener("input", schedulePatch, true);
-  document.addEventListener("change", schedulePatch, true);
-  document.addEventListener("click", function () { setTimeout(schedulePatch, 0); }, true);
-
-  let ticks = 0;
-  const patchTimer = setInterval(function () {
-    ticks += 1;
-    patchReadyRoadmapCta();
-    if (ticks >= 80) clearInterval(patchTimer);
-  }, 250);
-
-  schedulePatch();
+  window.BSRoadmap = {
+    collect: collectRoadmapData,
+    derive: calculateRoadmapDerived,
+    save: saveRoadmapData,
+    load: loadRoadmapData,
+    captureAndOpenRoadmap,
+    captureAndPreview,
+    money
+  };
 })();
