@@ -24,6 +24,18 @@ return [
 {mark:'&#128274;',title:'From Waiting to Locking-In',body:'You secure the '+money(target)+' price today instead of watching the market move further away.'},
 {mark:'&#8856;$',title:'From Renting to Investing',body:rentLine}
 ];}
+function goToPage6(d,root){
+  function render(){window.renderRoadmapPage6(d,root);window.scrollTo({top:0,behavior:'smooth'});}
+  if(window.renderRoadmapPage6){render();return;}
+  var existing=document.querySelector('script[data-roadmap-page6="true"]');
+  if(existing){existing.addEventListener('load',function(){if(window.renderRoadmapPage6){render();}});return;}
+  var script=document.createElement('script');
+  script.src='roadmap-page6.js?v=20260518-1';
+  script.dataset.roadmapPage6='true';
+  script.onload=function(){if(window.renderRoadmapPage6){render();}else{alert('Page 6 could not load. Refresh the roadmap and try again.');}};
+  script.onerror=function(){alert('Page 6 could not load. Refresh the roadmap and try again.');};
+  document.body.appendChild(script);
+}
 function renderRoadmapPage5(data,root){
 var d=data||{},c=d.customer||{},p=d.property||{},f=d.finance||{},a=d.assumptions||{},der=d.derived||{},fmt=der.formatted||{};
 var customerName=String(c.name||'Customer').trim()||'Customer';
@@ -42,7 +54,7 @@ var depositPercent=Math.round(depositRate*100);
 var cards=transferCopy(isUpgrader,target,rent);
 var styleId='roadmap-page5-style';if(!document.getElementById(styleId)){var s=document.createElement('style');s.id=styleId;s.textContent=css();document.head.appendChild(s);}
 root.innerHTML=`<section class="rm5-page"><header class="rm5-topbar"><div><div class="rm5-brand-mark"></div><div class="rm5-logo">BuySooner</div><div class="rm5-tagline">Buy sooner. Buy smarter.</div></div><div class="rm5-page-label">Page 5 - Can BuySooner Be the Solution?<div class="rm5-progress"><span></span></div></div></header><div class="rm5-report"><section class="rm5-hero"><div><h1>Can BuySooner be the solution?</h1><p>We've crunched the numbers. Here is your bridge.</p></div><aside class="rm5-image-card"><img src="i5.jpg" alt="BuySooner bridge visual" onerror="this.style.visibility='hidden';"></aside></section><section class="rm5-section"><h2 class="rm5-section-title">The Reality Check</h2><div class="rm5-card rm5-reality"><div class="rm5-reality-top"><article class="rm5-fact"><h3>The Target</h3><div class="value">${money(target)}</div><p>The price of the home you want to buy today.</p></article><article class="rm5-fact"><h3>The Hurdle</h3><div class="value">${money(hurdle)}</div><p>The ${depositPercent}% deposit usually required to unlock the door.</p></article></div><div class="rm5-down">&#8595;</div><article class="rm5-missing"><h3>The Missing Piece</h3><div class="value">${money(missingPiece)}</div><p>The shortfall preventing your purchase now.</p></article></div></section><section class="rm5-section"><h2 class="rm5-section-title">The Logic of the Solution</h2><div class="rm5-card rm5-equation"><div class="rm5-equation-grid"><article class="rm5-eq-card"><div class="rm5-eq-value">${fmt.customerContribution||money(customerDeposit)}</div><div class="rm5-eq-label">Your Deposit</div></article><div class="rm5-symbol">+</div><article class="rm5-eq-card"><div class="rm5-eq-value">${fmt.buySoonerBoost||money(boost)}</div><div class="rm5-eq-label">BuySooner Bridge</div></article><div class="rm5-symbol">=</div><article class="rm5-eq-card final"><div class="rm5-eq-value">${money(totalDeposit)}</div><div class="rm5-eq-label">Total Deposit</div><div class="rm5-milestone">${depositPercent}% Milestone Achieved</div></article></div><div class="rm5-result-bar"><strong>The Result:</strong> BuySooner bridges the missing piece so you can move from planning to buying.</div></div></section><section class="rm5-section"><h2 class="rm5-section-title">The Transfer of Value</h2><div class="rm5-transfer"><article class="rm5-card rm5-transfer-card"><div class="rm5-transfer-mark">${cards[0].mark}</div><h3>${cards[0].title}</h3><p>${cards[0].body}</p></article><article class="rm5-card rm5-transfer-card"><div class="rm5-transfer-mark">${cards[1].mark}</div><h3>${cards[1].title}</h3><p>${cards[1].body}</p></article><article class="rm5-card rm5-transfer-card"><div class="rm5-transfer-mark">${cards[2].mark}</div><h3>${cards[2].title}</h3><p>${cards[2].body}</p></article></div><div class="rm5-bottom-line">You bring your deposit. We bring the bridge.</div></section><div class="rm5-next-wrap"><button id="rm5NextPage6" class="rm5-next-btn" type="button">Show the Path to Full Ownership &#8594;</button></div><footer class="rm5-footer">Prepared for ${esc(customerName)}. This Roadmap is an indicative illustration only. It is not approval, financial advice, a valuation, or a credit offer.</footer></div></section>`;
-var next=root.querySelector('#rm5NextPage6');if(next){next.addEventListener('click',function(){if(window.renderRoadmapPage6){window.renderRoadmapPage6(d,root);}else{alert('Page 6 is next: Show the Path to Full Ownership.');}});}
+var next=root.querySelector('#rm5NextPage6');if(next){next.addEventListener('click',function(){goToPage6(d,root);});}
 }
 window.renderRoadmapPage5=renderRoadmapPage5;
 })();
