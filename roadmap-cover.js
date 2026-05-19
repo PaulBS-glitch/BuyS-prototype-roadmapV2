@@ -7,6 +7,18 @@ function css(){return `
 @media(max-width:900px){.rmc-cover{min-height:auto;padding:30px}.rmc-cover:before{position:absolute;right:-160px;bottom:-90px;width:440px;height:450px;opacity:.35}.rmc-title{font-size:48px}.rmc-index li{font-size:14px}.rmc-actions{justify-content:stretch}.rmc-next{width:100%}.rmc-bottom-brand{position:static;margin-top:26px}.rmc-footer{margin-top:26px}}@media print{.rmc-cover{max-width:none;min-height:100vh;box-shadow:none;border-radius:0}.rmc-actions{display:none}}`;}
 function ensureStyle(){var id='roadmap-cover-style';if(!document.getElementById(id)){var s=document.createElement('style');s.id=id;s.textContent=css();document.head.appendChild(s);}}
 function firstName(name){var s=String(name||'Alex').trim();return s.split(/\s+/)[0]||s||'Alex';}
+function goToPage1(data,root){
+  function render(){window.renderRoadmapPage1(data,root);window.scrollTo({top:0,behavior:'smooth'});}
+  if(window.renderRoadmapPage1){render();return;}
+  var existing=document.querySelector('script[data-roadmap-page1="true"]');
+  if(existing){existing.addEventListener('load',function(){if(window.renderRoadmapPage1){render();}});return;}
+  var script=document.createElement('script');
+  script.src='roadmap-page1.js?v=20260518-12';
+  script.dataset.roadmapPage1='true';
+  script.onload=function(){if(window.renderRoadmapPage1){render();}else{alert('Page 1 could not load. Refresh the roadmap and try again.');}};
+  script.onerror=function(){alert('Page 1 could not load. Refresh the roadmap and try again.');};
+  document.body.appendChild(script);
+}
 function renderRoadmapCover(data,root){
   var d=data||{},c=d.customer||{},b=d.broker||{};
   var customerName=String(c.name||c.fullName||'Customer').trim()||'Customer';
@@ -15,7 +27,7 @@ function renderRoadmapCover(data,root){
   ensureStyle();
   root.innerHTML=`<section class="rmc-cover"><div class="rmc-inner"><main class="rmc-main"><p class="rmc-eyebrow">Your personalised Roadmap</p><h1 class="rmc-title">${esc(customerName)},<span>your BuySooner Roadmap.</span></h1><p class="rmc-sub">This Roadmap explains, in plain English, how BuySooner may help people like you bridge the deposit gap, move sooner and work toward full ownership. <strong>${esc(brokerName)}</strong> helps structure the mortgage pathway. BuySooner helps assess the bridge.</p><p class="rmc-promise-line">Our promise is clear numbers, plain English, transparent assumptions and no moving forward unless you understand the structure.</p><section class="rmc-contents"><h2>What this Roadmap covers</h2><ol class="rmc-index"><li><span>1</span><div>Your goal and deposit bridge</div></li><li><span>2</span><div>The cost of waiting</div></li><li><span>3</span><div>The numbers and worked example</div></li><li><span>4</span><div>Exit pathway and FAQ</div></li><li><span>5</span><div>Disclosures and next steps</div></li></ol></section><section class="rmc-help"><h2>Questions are expected.</h2><p>If anything is unclear, <strong>${esc(brokerFirst)}</strong> and the BuySooner team are here to help you understand the good, the great and the risks before you move forward.</p></section><div class="rmc-actions"><button id="rmcStartReport" class="rmc-next" type="button">Start My Roadmap →</button></div><footer class="rmc-footer">This Roadmap is an indicative illustration only. It is not approval, financial advice, a valuation, or a credit offer. Eligibility, approval, valuation, lender requirements, BuySooner assessment and exit outcomes must be confirmed before you rely on the structure.</footer></main><div class="rmc-bottom-brand">BuySooner — <span>Buy sooner. Buy smarter.</span></div></div></section>`;
   var next=root.querySelector('#rmcStartReport');
-  if(next){next.addEventListener('click',function(){if(window.renderRoadmapPage1){window.renderRoadmapPage1(d,root);window.scrollTo({top:0,behavior:'smooth'});}else{alert('Page 1 could not load. Refresh the roadmap and try again.');}});}
+  if(next){next.addEventListener('click',function(){goToPage1(d,root);});}
 }
 window.renderRoadmapCover=renderRoadmapCover;
 })();
