@@ -13,7 +13,7 @@ function goToPage1(data,root){
   var existing=document.querySelector('script[data-roadmap-page1="true"]');
   if(existing){existing.addEventListener('load',function(){if(window.renderRoadmapPage1){render();}});return;}
   var script=document.createElement('script');
-  script.src='roadmap-page1.js?v=20260518-12';
+  script.src='roadmap-page1.js?v=20260518-14';
   script.dataset.roadmapPage1='true';
   script.onload=function(){if(window.renderRoadmapPage1){render();}else{alert('Page 1 could not load. Refresh the roadmap and try again.');}};
   script.onerror=function(){alert('Page 1 could not load. Refresh the roadmap and try again.');};
