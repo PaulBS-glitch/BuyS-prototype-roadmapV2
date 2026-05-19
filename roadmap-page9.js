@@ -52,7 +52,7 @@ function goToPage10(d,root){
   var existing=document.querySelector('script[data-roadmap-page10="true"]');
   if(existing){existing.addEventListener('load',function(){if(window.renderRoadmapPage10){render();}});return;}
   var script=document.createElement('script');
-  script.src='roadmap-page10.js?v=20260518-23';
+  script.src='roadmap-page10.js?v=20260518-24';
   script.dataset.roadmapPage10='true';
   script.onload=function(){if(window.renderRoadmapPage10){render();}else{alert('Page 10 could not load. Refresh the roadmap and try again.');}};
   script.onerror=function(){alert('Page 10 could not load. Refresh the roadmap and try again.');};
