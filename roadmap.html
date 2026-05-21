@@ -19,8 +19,11 @@
     .rm3-hero .rm3-image-card{position:absolute!important;right:0!important;top:18px!important;width:33%!important;min-height:230px!important;aspect-ratio:1.02/1!important;opacity:.33!important;filter:saturate(.9) contrast(.95)!important;z-index:1!important;box-shadow:none!important;border-color:rgba(215,229,228,.35)!important}
     .rm3-hero .rm3-image-card:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.68) 34%,rgba(255,255,255,.18) 100%);z-index:2;pointer-events:none}
     .rm3-hero .rm3-image-card img{position:relative!important;z-index:1!important}
-    @media(max-width:900px){.rm3-hero{display:grid!important;grid-template-columns:1fr!important;min-height:auto!important;padding:0!important}.rm3-hero>div{padding-right:0!important}.rm3-hero .rm3-image-card{position:relative!important;right:auto!important;top:auto!important;width:100%!important;opacity:.55!important;margin-top:20px!important}.rm3-hero .rm3-image-card:before{display:none!important}}
-    @media print{body{background:#fff;padding:0}.toolbar{display:none}}
+    .rm9-hero:after{opacity:.28!important;filter:saturate(.95) contrast(.98)!important}
+    .rm9-topbar.rm9-reveal,.rm9-refi-card.rm9-reveal,.rm9-numbers-card.rm9-reveal,.rm9-track.rm9-reveal,.rm9-actions.rm9-reveal,.rm9-footer.rm9-reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+    .rm9-topbar.rm9-reveal.is-visible,.rm9-refi-card.rm9-reveal.is-visible,.rm9-numbers-card.rm9-reveal.is-visible,.rm9-track.rm9-reveal.is-visible,.rm9-actions.rm9-reveal.is-visible,.rm9-footer.rm9-reveal.is-visible{opacity:1;transform:translateY(0)}
+    @media(max-width:900px){.rm3-hero{display:grid!important;grid-template-columns:1fr!important;min-height:auto!important;padding:0!important}.rm3-hero>div{padding-right:0!important}.rm3-hero .rm3-image-card{position:relative!important;right:auto!important;top:auto!important;width:100%!important;opacity:.55!important;margin-top:20px!important}.rm3-hero .rm3-image-card:before{display:none!important}.rm9-hero:after{opacity:.16!important}}
+    @media print{body{background:#fff;padding:0}.toolbar{display:none}.rm9-reveal{opacity:1!important;transform:none!important;transition:none!important}}
   </style>
 </head>
 <body>
@@ -36,23 +39,23 @@
       <p>Complete the prototype first, then use the final roadmap action to capture the scenario and open this report.</p>
     </section>
   </main>
-  <script src="roadmap-data.js?v=20260521-18"></script>
-  <script src="roadmap-cover.js?v=20260521-18"></script>
-  <script src="roadmap-page1.js?v=20260521-18"></script>
-  <script src="roadmap-page2.js?v=20260521-18"></script>
-  <script src="roadmap-page3.js?v=20260521-18"></script>
-  <script src="roadmap-page4.js?v=20260521-18"></script>
-  <script src="roadmap-page5.js?v=20260521-18"></script>
-  <script src="roadmap-page6.js?v=20260521-18"></script>
-  <script src="roadmap-page7.js?v=20260521-18"></script>
-  <script src="roadmap-page8.js?v=20260521-18"></script>
-  <script src="roadmap-page9.js?v=20260521-18"></script>
-  <script src="roadmap-page10.js?v=20260521-18"></script>
-  <script src="roadmap-page11.js?v=20260521-18"></script>
-  <script src="roadmap-page12.js?v=20260521-18"></script>
-  <script src="roadmap-page13-final.js?v=20260521-18"></script>
-  <script src="roadmap-page7-to-8.js?v=20260521-18"></script>
-  <script src="roadmap-page8-to-9.js?v=20260521-18"></script>
+  <script src="roadmap-data.js?v=20260521-19"></script>
+  <script src="roadmap-cover.js?v=20260521-19"></script>
+  <script src="roadmap-page1.js?v=20260521-19"></script>
+  <script src="roadmap-page2.js?v=20260521-19"></script>
+  <script src="roadmap-page3.js?v=20260521-19"></script>
+  <script src="roadmap-page4.js?v=20260521-19"></script>
+  <script src="roadmap-page5.js?v=20260521-19"></script>
+  <script src="roadmap-page6.js?v=20260521-19"></script>
+  <script src="roadmap-page7.js?v=20260521-19"></script>
+  <script src="roadmap-page8.js?v=20260521-19"></script>
+  <script src="roadmap-page9.js?v=20260521-19"></script>
+  <script src="roadmap-page10.js?v=20260521-19"></script>
+  <script src="roadmap-page11.js?v=20260521-19"></script>
+  <script src="roadmap-page12.js?v=20260521-19"></script>
+  <script src="roadmap-page13-final.js?v=20260521-19"></script>
+  <script src="roadmap-page7-to-8.js?v=20260521-19"></script>
+  <script src="roadmap-page8-to-9.js?v=20260521-19"></script>
   <script>
     const data = window.BSRoadmap && window.BSRoadmap.load ? window.BSRoadmap.load() : null;
     if (data && window.renderRoadmapCover) {
