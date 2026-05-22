@@ -1,7 +1,8 @@
-/* Page 9 refinement layer: hero, refinance copy, assumptions readability, tracking layout and calculator modal UX. */
+/* Page 9 refinement layer: hero, refinance copy, tracking layout and calculator modal UX. */
 (function(){
   function injectPage9RefinementStyles(){
-    if(document.getElementById('roadmap-page9-refinement-style')) return;
+    var old=document.getElementById('roadmap-page9-refinement-style');
+    if(old) old.remove();
     var style=document.createElement('style');
     style.id='roadmap-page9-refinement-style';
     style.textContent=`
@@ -22,45 +23,58 @@
       .rm9-track h3{font-size:21px!important;}
       .rm9-track p{font-size:15.2px!important;}
 
-      .rm9-modal-body{display:grid!important;gap:20px!important;}
-      .rm9-profile-block{position:relative!important;overflow:hidden!important;background:linear-gradient(100deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.88) 52%,rgba(234,246,245,.72) 100%)!important;border:1px solid #d7e5e4!important;border-radius:24px!important;padding:24px!important;box-shadow:0 14px 32px rgba(12,51,88,.07)!important;}
-      .rm9-profile-block:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.99) 0%,rgba(255,255,255,.84) 48%,rgba(255,255,255,.28) 100%),url('calculate.jpg') right center/cover no-repeat;opacity:.42;pointer-events:none;}
-      .rm9-profile-block .rm9-modal-hero,.rm9-profile-block .rm9-deal-strip{position:relative!important;z-index:2!important;}
-      .rm9-profile-block .rm9-modal-hero{display:block!important;margin-bottom:16px!important;}
-      .rm9-profile-block .rm9-modal-title{max-width:680px!important;padding:0!important;border:0!important;box-shadow:none!important;background:transparent!important;}
-      .rm9-profile-block .rm9-modal-title h2{font-size:44px!important;line-height:1!important;letter-spacing:-.055em!important;}
-      .rm9-profile-block .rm9-modal-title p{max-width:620px!important;font-size:16px!important;line-height:1.48!important;}
+      .rm9-modal{background:rgba(7,31,58,.82)!important;}
+      .rm9-modal-card{position:relative!important;overflow:hidden!important;background:linear-gradient(135deg,rgba(255,255,255,.92) 0%,rgba(247,251,251,.91) 62%,rgba(234,246,245,.88) 100%)!important;}
+      .rm9-modal-card:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.82)),url('calculate.jpg') center center/cover no-repeat;opacity:.42;pointer-events:none;}
+      .rm9-modal-top,.rm9-modal-body{position:relative!important;z-index:2!important;}
+      .rm9-modal-top{background:rgba(255,255,255,.82)!important;backdrop-filter:blur(5px);}
+      .rm9-modal-body{display:grid!important;gap:18px!important;padding:28px!important;}
+
+      .rm9-profile-block{position:relative!important;overflow:hidden!important;background:rgba(255,255,255,.88)!important;border:1px solid #d7e5e4!important;border-radius:24px!important;padding:28px!important;box-shadow:0 16px 36px rgba(12,51,88,.08)!important;}
+      .rm9-profile-block:after{display:none!important;}
+      .rm9-profile-block .rm9-modal-hero{display:block!important;margin-bottom:20px!important;}
+      .rm9-profile-block .rm9-modal-title{max-width:760px!important;padding:0!important;border:0!important;box-shadow:none!important;background:transparent!important;}
+      .rm9-profile-block .rm9-modal-title h2{font-size:48px!important;line-height:1!important;letter-spacing:-.06em!important;color:#071f3a!important;}
+      .rm9-profile-block .rm9-modal-title p{max-width:720px!important;font-size:17px!important;line-height:1.5!important;color:#526071!important;font-weight:760!important;}
       .rm9-profile-block .rm9-modal-photo{display:none!important;}
-      .rm9-profile-block .rm9-deal-strip{margin-bottom:0!important;box-shadow:none!important;background:rgba(255,255,255,.92)!important;}
-      .rm9-calculator{border-radius:24px!important;border:1px solid #d7e5e4!important;background:#fff!important;box-shadow:0 16px 34px rgba(12,51,88,.08)!important;}
-      .rm9-inputs{border-bottom:1px solid rgba(8,122,120,.18)!important;background:#fff!important;}
-      .rm9-inputs h3{margin-bottom:4px!important;}
+      .rm9-profile-block .rm9-deal-strip{margin-bottom:0!important;box-shadow:none!important;background:rgba(255,255,255,.94)!important;border-radius:18px!important;}
+      .rm9-deal-strip h3{font-size:22px!important;}
+
+      .rm9-calculator{border-radius:24px!important;border:1px solid #d7e5e4!important;background:rgba(255,255,255,.94)!important;box-shadow:0 18px 40px rgba(12,51,88,.09)!important;}
+      .rm9-inputs{border-bottom:1px solid rgba(8,122,120,.18)!important;background:transparent!important;padding:24px!important;}
+      .rm9-inputs h3{font-size:28px!important;margin-bottom:4px!important;}
+      .rm9-inputs h3:after{content:'Test the assumptions';display:block;margin-top:6px;color:#526071;font-size:15px;line-height:1.4;font-weight:760;letter-spacing:0;}
       .rm9-input-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px 24px!important;}
-      .rm9-control-group{background:#f7fbfb!important;border:1px solid #d7e5e4!important;border-radius:18px!important;padding:16px 16px 14px!important;}
+      .rm9-control-group{background:#f7fbfb!important;border:1px solid #d7e5e4!important;border-radius:18px!important;padding:17px 18px 15px!important;}
       .rm9-select{display:none!important;}
-      .rm9-slider-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;margin-bottom:12px!important;}
-      .rm9-slider-head label{margin:0!important;color:#071f3a!important;font-size:16px!important;font-weight:900!important;}
-      .rm9-slider-value{min-width:94px;text-align:center;border:1px solid #d7e5e4;border-radius:14px;background:#fff;color:#071f3a;padding:9px 12px;font-size:17px;font-weight:950;letter-spacing:-.025em;}
+      .rm9-slider-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;margin-bottom:13px!important;}
+      .rm9-slider-head label{margin:0!important;color:#071f3a!important;font-size:17px!important;font-weight:900!important;}
+      .rm9-slider-value{min-width:104px;text-align:center;border:1px solid #d7e5e4;border-radius:14px;background:#fff;color:#071f3a;padding:10px 12px;font-size:18px;font-weight:950;letter-spacing:-.025em;}
       .rm9-slider{width:100%;appearance:none;background:transparent;cursor:pointer;}
       .rm9-slider::-webkit-slider-runnable-track{height:8px;border-radius:999px;background:linear-gradient(90deg,#087a78 0%,#087a78 var(--fill,50%),#d8e1e7 var(--fill,50%),#d8e1e7 100%);}
       .rm9-slider::-webkit-slider-thumb{appearance:none;width:22px;height:22px;border-radius:999px;background:#087a78;border:4px solid #fff;box-shadow:0 3px 10px rgba(7,31,58,.24);margin-top:-7px;}
       .rm9-slider::-moz-range-track{height:8px;border-radius:999px;background:#d8e1e7;}
       .rm9-slider::-moz-range-progress{height:8px;border-radius:999px;background:#087a78;}
       .rm9-slider::-moz-range-thumb{width:18px;height:18px;border-radius:999px;background:#087a78;border:4px solid #fff;box-shadow:0 3px 10px rgba(7,31,58,.24);}
-      .rm9-slider-ticks{display:flex;justify-content:space-between;margin-top:8px;color:#64748b;font-size:11px;font-weight:800;}
-      .rm9-outputs{background:linear-gradient(180deg,#fff 0%,#f7fbfb 100%)!important;}
-      .rm9-results-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important;align-items:stretch!important;}
-      .rm9-result-box{min-height:98px!important;padding:15px 14px!important;background:#fff!important;border-color:#d7e5e4!important;}
+      .rm9-slider-ticks{display:flex;justify-content:space-between;margin-top:9px;color:#64748b;font-size:11px;font-weight:800;}
+
+      .rm9-outputs{background:transparent!important;padding:24px!important;}
+      .rm9-outputs>h3{font-size:28px!important;margin-bottom:16px!important;}
+      .rm9-results-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important;align-items:stretch!important;}
+      .rm9-result-box{min-height:96px!important;padding:15px 14px!important;background:#fff!important;border-color:#d7e5e4!important;}
       .rm9-result-box.is-key{background:#eaf6f5!important;border-color:rgba(8,122,120,.34)!important;box-shadow:0 10px 22px rgba(8,122,120,.08)!important;}
       .rm9-result-box.is-key .rm9-result-label{color:#087a78!important;letter-spacing:.065em!important;}
       .rm9-result-box.is-key .rm9-result-value{color:#087a78!important;font-size:27px!important;font-weight:950!important;}
       .rm9-result-box:not(.is-key) .rm9-result-value{font-size:20px!important;font-weight:820!important;}
-      .rm9-answer{border:0!important;background:linear-gradient(135deg,#eaf6f5 0%,#f4fbfa 100%)!important;border:1px solid rgba(8,122,120,.26)!important;border-radius:18px!important;padding:18px 20px!important;margin:0 0 18px!important;}
-      .rm9-answer h3,.rm9-answer .green{color:#087a78!important;font-size:34px!important;line-height:1!important;font-weight:950!important;letter-spacing:-.045em!important;}
-      .rm9-explanation{padding:24px!important;border-radius:22px!important;}
-      .rm9-explanation h3{margin-bottom:14px!important;}
-      .rm9-explanation p{font-weight:500!important;}
-      @media(max-width:900px){.rm9-hero{min-height:auto!important;padding:30px 24px!important;}.rm9-hero:after{opacity:.16!important;}.rm9-input-grid,.rm9-results-grid{grid-template-columns:1fr!important;}.rm9-profile-block:after{opacity:.20!important;background-position:center!important;}}
+      .rm9-output-section-title{grid-column:1/-1;margin:8px 0 2px;color:#071f3a;font-size:21px;line-height:1.1;font-weight:950;letter-spacing:-.035em;}
+      .rm9-output-section-title.support{margin-top:14px;color:#526071;font-size:17px;}
+
+      .rm9-answer{grid-column:1/-1!important;order:-2!important;border:1px solid rgba(8,122,120,.28)!important;background:linear-gradient(135deg,#eaf6f5 0%,#f7fbfb 100%)!important;border-radius:20px!important;padding:23px 24px!important;margin:0 0 4px!important;text-align:center!important;}
+      .rm9-answer h3,.rm9-answer .green{color:#087a78!important;font-size:38px!important;line-height:1!important;font-weight:950!important;letter-spacing:-.05em!important;}
+      .rm9-explanation{padding:26px!important;border-radius:24px!important;background:rgba(255,255,255,.94)!important;box-shadow:0 16px 36px rgba(12,51,88,.08)!important;}
+      .rm9-explanation h3{margin-bottom:14px!important;font-size:28px!important;}
+      .rm9-explanation p{font-weight:620!important;font-size:16.5px!important;line-height:1.55!important;color:#1f2933!important;}
+      @media(max-width:900px){.rm9-hero{min-height:auto!important;padding:30px 24px!important;}.rm9-hero:after{opacity:.16!important;}.rm9-input-grid,.rm9-results-grid{grid-template-columns:1fr!important;}.rm9-profile-block .rm9-modal-title h2{font-size:38px!important;}}
     `;
     document.head.appendChild(style);
   }
@@ -89,29 +103,32 @@
 
   function enhanceCalculatorModal(){
     var modal=document.querySelector('.rm9-modal-card');
-    if(!modal || modal.dataset.rm9Enhanced==='true') return;
-    modal.dataset.rm9Enhanced='true';
-    var body=modal.querySelector('.rm9-modal-body');
-    var hero=modal.querySelector('.rm9-modal-hero');
-    var deal=modal.querySelector('.rm9-deal-strip');
-    if(hero){
-      var title=hero.querySelector('.rm9-modal-title h2');
-      if(title) title.textContent='The Numbers Behind Your Exit';
+    if(!modal) return;
+    if(modal.dataset.rm9Enhanced!=='true'){
+      modal.dataset.rm9Enhanced='true';
+      var body=modal.querySelector('.rm9-modal-body');
+      var hero=modal.querySelector('.rm9-modal-hero');
+      var deal=modal.querySelector('.rm9-deal-strip');
+      if(hero){
+        var title=hero.querySelector('.rm9-modal-title h2');
+        var para=hero.querySelector('.rm9-modal-title p');
+        if(title) title.textContent='The Numbers Behind Your Exit';
+        if(para) para.textContent='See how your starting deal, home value, mortgage balance and BuySooner payout come together to estimate when a standard refinance may be workable.';
+      }
+      if(body && hero && deal){
+        var profile=document.createElement('section');
+        profile.className='rm9-profile-block';
+        body.insertBefore(profile, hero);
+        profile.appendChild(hero);
+        profile.appendChild(deal);
+      }
+      convertSelectsToSliders(modal);
+      structureOutputs(modal);
+      var answer=modal.querySelector('.rm9-answer');
+      var outputs=modal.querySelector('.rm9-results-grid');
+      if(answer && outputs && answer.parentElement!==outputs){outputs.insertBefore(answer, outputs.firstChild);}
     }
-    if(body && hero && deal){
-      var profile=document.createElement('section');
-      profile.className='rm9-profile-block';
-      body.insertBefore(profile, hero);
-      profile.appendChild(hero);
-      profile.appendChild(deal);
-    }
-    convertSelectsToSliders(modal);
-    reorderOutputs(modal);
-    var answer=modal.querySelector('.rm9-answer');
-    var explanation=modal.querySelector('.rm9-explanation');
-    if(answer && explanation && answer.parentElement!==explanation){
-      explanation.insertBefore(answer, explanation.firstChild);
-    }
+    rewriteCustomerExplanation(modal);
   }
 
   function convertSelectsToSliders(modal){
@@ -128,22 +145,13 @@
       group.dataset.sliderReady='true';
       var values=Array.prototype.slice.call(select.options).filter(function(o){return o.value!=='custom';}).map(function(o){return o.value;});
       var cfg=configs[key];
-      var header=document.createElement('div');
-      header.className='rm9-slider-head';
-      var lab=document.createElement('label');
-      lab.textContent=cfg.label;
-      var val=document.createElement('div');
-      val.className='rm9-slider-value';
+      var header=document.createElement('div');header.className='rm9-slider-head';
+      var lab=document.createElement('label');lab.textContent=cfg.label;
+      var val=document.createElement('div');val.className='rm9-slider-value';
       header.appendChild(lab);header.appendChild(val);
-      var slider=document.createElement('input');
-      slider.className='rm9-slider';
-      slider.type='range';slider.min='0';slider.max=String(values.length-1);slider.step='1';
-      slider.value=String(Math.max(0,values.indexOf(select.value)));
-      var ticks=document.createElement('div');
-      ticks.className='rm9-slider-ticks';
-      ticks.innerHTML=(cfg.ticks||values).map(function(t){return '<span>'+t+'</span>';}).join('');
-      group.innerHTML='';
-      group.appendChild(header);group.appendChild(slider);group.appendChild(ticks);group.appendChild(select);
+      var slider=document.createElement('input');slider.className='rm9-slider';slider.type='range';slider.min='0';slider.max=String(values.length-1);slider.step='1';slider.value=String(Math.max(0,values.indexOf(select.value)));
+      var ticks=document.createElement('div');ticks.className='rm9-slider-ticks';ticks.innerHTML=(cfg.ticks||values).map(function(t){return '<span>'+t+'</span>';}).join('');
+      group.innerHTML='';group.appendChild(header);group.appendChild(slider);group.appendChild(ticks);group.appendChild(select);
       function sync(){
         var idx=Number(slider.value)||0;
         select.value=values[idx];
@@ -151,23 +159,50 @@
         var fill=values.length>1 ? (idx/(values.length-1))*100 : 0;
         slider.style.setProperty('--fill',fill+'%');
       }
-      slider.addEventListener('input',function(){sync();select.dispatchEvent(new Event('change',{bubbles:true}));});
+      slider.addEventListener('input',function(){sync();select.dispatchEvent(new Event('change',{bubbles:true}));setTimeout(function(){rewriteCustomerExplanation(modal);},0);});
       sync();
     });
   }
 
-  function reorderOutputs(modal){
+  function structureOutputs(modal){
     var grid=modal.querySelector('.rm9-results-grid');
-    if(!grid) return;
+    if(!grid || grid.dataset.structured==='true') return;
+    grid.dataset.structured='true';
     var boxes=Array.prototype.slice.call(grid.querySelectorAll('.rm9-result-box'));
-    var keyLabels=['New repayment','New bank loan','Loan ratio','Your home equity'];
+    var keyLabels=['Loan ratio','New bank loan','Your home equity','New repayment'];
     var key=[],support=[];
     boxes.forEach(function(box){
       var labelEl=box.querySelector('.rm9-result-label');
       var label=labelEl ? labelEl.textContent.trim() : '';
       if(keyLabels.indexOf(label)!==-1){box.classList.add('is-key');key.push(box);}else{support.push(box);}
     });
-    key.concat(support).forEach(function(box){grid.appendChild(box);});
+    var keyTitle=document.createElement('div');keyTitle.className='rm9-output-section-title';keyTitle.textContent='Key refinance numbers';
+    var supportTitle=document.createElement('div');supportTitle.className='rm9-output-section-title support';supportTitle.textContent='Supporting calculation';
+    grid.innerHTML='';
+    grid.appendChild(keyTitle);key.forEach(function(box){grid.appendChild(box);});
+    grid.appendChild(supportTitle);support.forEach(function(box){grid.appendChild(box);});
+  }
+
+  function rewriteCustomerExplanation(modal){
+    if(!modal) return;
+    var green=modal.querySelector('[data-out="green"]');
+    var lvr=modal.querySelector('[data-out="lvr"]');
+    var refi=modal.querySelector('[data-out="refiAmount"]');
+    var equity=modal.querySelector('[data-out="equity"]');
+    var summary=modal.querySelector('[data-out="summary"]');
+    var action=modal.querySelector('[data-out="action"]');
+    if(!green || !summary || !action) return;
+    var year=(green.textContent.match(/Year\s+\d+/)||['the selected year'])[0];
+    var ready=/Green Light/i.test(green.textContent);
+    var lvrText=lvr?lvr.textContent:'the selected loan ratio';
+    var refiText=refi?refi.textContent:'the new bank loan';
+    var equityText=equity?equity.textContent:'your remaining home equity';
+    summary.textContent=ready?
+      'This scenario suggests you may be refinance-ready in '+year+'. The estimated loan ratio is '+lvrText+', which is around the level a standard lender may consider workable.':
+      'This scenario suggests you may not be refinance-ready by '+year+'. The estimated loan ratio is '+lvrText+', so more equity growth, mortgage reduction or time may be needed.';
+    action.textContent=ready?
+      'At that point, the numbers indicate a standard bank loan of about '+refiText+' could repay the remaining mortgage and pay BuySooner out. BuySooner steps aside, your loan becomes a normal bank mortgage, and you continue with approximately '+equityText+' in home equity. A lender would still need to confirm valuation, income, expenses, credit position and policy at the time.':
+      'The practical next step is to keep building equity, reduce the mortgage balance where possible and test the pathway again. A lender would still need to confirm valuation, income, expenses, credit position and policy at the time.';
   }
 
   function observeCalculatorModal(){
