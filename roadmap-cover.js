@@ -9,16 +9,16 @@ function css(){return `
 function ensureStyle(){var id='roadmap-cover-style';if(!document.getElementById(id)){var s=document.createElement('style');s.id=id;s.textContent=css();document.head.appendChild(s);}}
 function firstName(name){var s=String(name||'Alex').trim();return s.split(/\s+/)[0]||s||'Alex';}
 function revealCover(root){var els=Array.prototype.slice.call(root.querySelectorAll('.rmc-reveal,.rmc-index li'));els.forEach(function(el,i){el.style.transitionDelay=(i*65)+'ms';});requestAnimationFrame(function(){els.forEach(function(el){el.classList.add('is-visible');});});}
-function goToPage1(data,root){
-  function render(){window.renderRoadmapPage1(data,root);window.scrollTo({top:0,behavior:'smooth'});}
-  if(window.renderRoadmapPage1){render();return;}
-  var existing=document.querySelector('script[data-roadmap-page1="true"]');
-  if(existing){existing.addEventListener('load',function(){if(window.renderRoadmapPage1){render();}});return;}
+function goToDreamPage(data,root){
+  function render(){window.renderRoadmapDreamPage(data,root);window.scrollTo({top:0,behavior:'smooth'});}
+  if(window.renderRoadmapDreamPage){render();return;}
+  var existing=document.querySelector('script[data-roadmap-dream="true"]');
+  if(existing){existing.addEventListener('load',function(){if(window.renderRoadmapDreamPage){render();}});return;}
   var script=document.createElement('script');
-  script.src='roadmap-page1.js?v=20260521-10';
-  script.dataset.roadmapPage1='true';
-  script.onload=function(){if(window.renderRoadmapPage1){render();}else{alert('Page 1 could not load. Refresh the roadmap and try again.');}};
-  script.onerror=function(){alert('Page 1 could not load. Refresh the roadmap and try again.');};
+  script.src='roadmap-page0-dream.js?v=20260522-01';
+  script.dataset.roadmapDream='true';
+  script.onload=function(){if(window.renderRoadmapDreamPage){render();}else{alert('The introduction page could not load. Refresh the roadmap and try again.');}};
+  script.onerror=function(){alert('The introduction page could not load. Refresh the roadmap and try again.');};
   document.body.appendChild(script);
 }
 function renderRoadmapCover(data,root){
@@ -30,7 +30,7 @@ function renderRoadmapCover(data,root){
   root.innerHTML=`<section class="rmc-cover"><div class="rmc-inner"><main class="rmc-main"><h1 class="rmc-title rmc-reveal">Your personalised <span>plan</span></h1><p class="rmc-prepared rmc-reveal">Prepared for ${esc(customerName)}</p><p class="rmc-sub rmc-reveal">This Roadmap explains, in plain English, how BuySooner helps bridge your deposit gap, move sooner and work toward full ownership. <strong>${esc(brokerName)}</strong> helps structure the mortgage pathway. BuySooner helps assess the bridge.</p><p class="rmc-promise-line rmc-reveal">Our promise is clear numbers, plain English, transparent assumptions and no moving forward unless you understand the structure.</p><section class="rmc-contents rmc-reveal"><h2>What your Roadmap covers</h2><ol class="rmc-index"><li><span>1</span><div><strong>Your goal and deposit bridge</strong><p>Explains how we bridge your savings gap today so you can stop the &quot;what-ifs&quot; and start buying immediately.</p></div></li><li><span>2</span><div><strong>The cost of waiting</strong><p>Proves exactly how much delaying your purchase costs you in rising prices and wasted rent.</p></div></li><li><span>3</span><div><strong>The numbers and worked example</strong><p>Delivers total financial transparency with a clear, real-world breakdown of how it works.</p></div></li><li><span>4</span><div><strong>Exit pathway</strong><p>Outlines your clear, hassle-free roadmap to transitioning into 100% traditional homeownership.</p></div></li><li><span>5</span><div><strong>FAQ and who to call</strong><p>Gives you instant answers to your biggest questions and direct access to your expert team.</p></div></li><li><span>6</span><div><strong>Disclosures and next steps</strong><p>Clears up the rules of engagement with zero fine-print surprises and shows you exactly how to get started.</p></div></li></ol></section></main></div><div class="rmc-actions rmc-reveal"><button id="rmcStartReport" class="rmc-next" type="button">Start My Roadmap →</button></div><div class="rmc-footer-wrap rmc-reveal"><div class="rmc-bottom-brand">BuySooner — <span>Buy sooner. Buy smarter.</span></div><section class="rmc-help"><h2>Questions are expected.</h2><p>If anything is unclear, <strong>${esc(brokerFirst)}</strong> and the BuySooner team are here to help you understand the benefits, trade-offs and risks before you move forward.</p></section><footer class="rmc-footer">This Roadmap is an indicative illustration only. It is not approval, financial advice, a valuation, or a credit offer. Eligibility, approval, valuation, lender requirements, BuySooner assessment and exit outcomes must be confirmed before you rely on the structure.</footer></div></section>`;
   revealCover(root);
   var next=root.querySelector('#rmcStartReport');
-  if(next){next.addEventListener('click',function(){goToPage1(d,root);});}
+  if(next){next.addEventListener('click',function(){goToDreamPage(d,root);});}
 }
 window.renderRoadmapCover=renderRoadmapCover;
 })();
