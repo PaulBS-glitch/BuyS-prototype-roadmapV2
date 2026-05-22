@@ -1,14 +1,15 @@
 /* Page 10 refinement layer: FAQ hero, accordion readability and bottom callout copy. */
 (function(){
   function injectPage10RefinementStyles(){
-    if(document.getElementById('roadmap-page10-refinement-style')) return;
+    var old=document.getElementById('roadmap-page10-refinement-style');
+    if(old) old.remove();
     var style=document.createElement('style');
     style.id='roadmap-page10-refinement-style';
     style.textContent=`
       .rm10-hero{
-        min-height:270px!important;
-        padding:40px 44px!important;
-        margin-bottom:24px!important;
+        min-height:310px!important;
+        padding:48px 52px!important;
+        margin-bottom:28px!important;
       }
       .rm10-hero:after{
         opacity:.34!important;
@@ -16,46 +17,59 @@
         width:46%!important;
       }
       .rm10-hero-inner{
-        max-width:760px!important;
+        max-width:780px!important;
       }
       .rm10-hero h1{
-        font-size:clamp(40px,5.1vw,64px)!important;
-        line-height:.98!important;
-        letter-spacing:-.058em!important;
-        max-width:720px!important;
+        font-size:clamp(40px,4.85vw,60px)!important;
+        line-height:1.03!important;
+        letter-spacing:-.055em!important;
+        max-width:760px!important;
       }
       .rm10-hero h2{
-        margin-top:15px!important;
+        margin-top:20px!important;
         font-size:clamp(24px,2.8vw,34px)!important;
-        line-height:1.08!important;
+        line-height:1.12!important;
       }
       .rm10-hero p{
-        margin-top:12px!important;
-        font-size:17px!important;
-        line-height:1.45!important;
+        margin-top:14px!important;
+        font-size:17.5px!important;
+        line-height:1.5!important;
+        max-width:680px!important;
+      }
+      .rm10-faq-card{
+        margin-top:4px!important;
       }
       .rm10-faq-header{
-        padding:26px 28px 22px!important;
+        padding:30px 32px 26px!important;
+      }
+      .rm10-faq-header h2{
+        font-size:32px!important;
+        line-height:1.08!important;
       }
       .rm10-faq-header p{
-        font-size:15.2px!important;
-        line-height:1.45!important;
+        font-size:16px!important;
+        line-height:1.5!important;
       }
       .rm10-print-note{
         display:none!important;
       }
       .rm10-accordion{
-        padding:12px 22px 22px!important;
+        padding:16px 26px 28px!important;
+      }
+      .rm10-acc{
+        padding-top:3px!important;
+        padding-bottom:3px!important;
       }
       .rm10-acc-btn{
-        padding:21px 4px!important;
+        padding:24px 4px!important;
       }
       .rm10-acc-btn h3{
-        font-size:24px!important;
+        font-size:25px!important;
+        line-height:1.14!important;
       }
       .rm10-acc-btn p{
-        font-size:14.4px!important;
-        line-height:1.4!important;
+        font-size:15px!important;
+        line-height:1.45!important;
       }
       .rm10-more{
         min-width:98px!important;
@@ -70,23 +84,23 @@
         border-color:rgba(8,122,120,.34)!important;
       }
       .rm10-qa-grid{
-        gap:15px!important;
+        gap:18px!important;
       }
       .rm10-qa{
-        padding:19px 20px!important;
+        padding:22px 22px!important;
       }
       .rm10-qa h4{
-        font-size:17.2px!important;
-        line-height:1.28!important;
-        margin-bottom:9px!important;
+        font-size:18px!important;
+        line-height:1.3!important;
+        margin-bottom:10px!important;
       }
       .rm10-qa p{
-        font-size:15px!important;
-        line-height:1.55!important;
+        font-size:15.5px!important;
+        line-height:1.6!important;
         font-weight:680!important;
       }
       .rm10-bottom{
-        padding:32px 36px!important;
+        padding:34px 38px!important;
       }
       .rm10-bottom h2{
         font-size:34px!important;
@@ -115,7 +129,12 @@
       var p=hero.querySelector('p');
       var customer='';
       if(h1){
-        customer=h1.textContent.replace(/^Customer FAQ’s for\s*/,'').replace(/^Customer FAQs for\s*/,'').replace(/^FAQ’s for\s*/,'').trim();
+        customer=h1.textContent
+          .replace(/^Customer FAQ’s for\s*/i,'')
+          .replace(/^Customer FAQs for\s*/i,'')
+          .replace(/^FAQ’s for\s*/i,'')
+          .replace(/^FAQs for\s*/i,'')
+          .trim();
         h1.textContent='FAQs for '+customer;
       }
       if(h2) h2.textContent='Clear answers before you move forward.';
