@@ -1,5 +1,6 @@
-/* BuySooner responsive layer
-   Purpose: laptop uses full available browser width; mobile auto-fits without sideways squeeze. */
+/* BuySooner responsive override layer
+   Desktop: wider full-browser shell.
+   Mobile: single-column, no sideways squeeze, no collapsed text columns. */
 
 :root {
   --rm-shell-max: 1120px;
@@ -18,11 +19,11 @@ body {
   min-height: 100svh;
 }
 
-img {
+img, svg, video, canvas {
   max-width: 100%;
 }
 
-/* Root application / opening screen */
+/* Laptop and large desktop opening app screen */
 @media (min-width: 1100px) {
   body:has(.page) {
     padding: 0 !important;
@@ -40,16 +41,9 @@ img {
     max-width: 1540px !important;
   }
 
-  .card {
+  .card,
+  .screen.active .card {
     width: 100% !important;
-  }
-
-  #screen0 .card,
-  #screen1 .card,
-  #screen2 .card,
-  #screen3 .card,
-  #screen4 .card,
-  #screen5 .card {
     max-width: none !important;
   }
 }
@@ -60,6 +54,7 @@ img {
   }
 }
 
+/* Tablet */
 @media (max-width: 1099px) {
   .page {
     width: 100% !important;
@@ -68,14 +63,16 @@ img {
   }
 
   .shell,
-  .card,
   .screen,
-  .screen.active {
+  .screen.active,
+  .card,
+  .screen.active .card {
     width: 100% !important;
     max-width: 100% !important;
   }
 }
 
+/* Mobile app screen */
 @media (max-width: 700px) {
   html,
   body {
@@ -88,49 +85,47 @@ img {
     background: #f7fbfb !important;
   }
 
-  body {
-    position: relative !important;
-  }
-
   body,
   body *,
   body *::before,
   body *::after {
     box-sizing: border-box !important;
+    min-width: 0 !important;
   }
 
-  .page {
-    width: 100% !important;
-    max-width: 100vw !important;
-    min-height: 100svh !important;
-    display: block !important;
-    padding: 0 !important;
-    overflow-x: hidden !important;
-  }
-
+  .page,
   .shell,
   .screen,
   .screen.active,
-  .card {
+  .card,
+  .screen.active .card {
     width: 100% !important;
     max-width: 100vw !important;
     min-width: 0 !important;
-    margin: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     overflow-x: hidden !important;
   }
 
-  .card {
+  .page {
+    display: block !important;
+    min-height: 100svh !important;
+    padding: 0 !important;
+  }
+
+  .card,
+  .screen.active .card {
     border-radius: 0 !important;
-    box-shadow: none !important;
     border-left: 0 !important;
     border-right: 0 !important;
+    box-shadow: none !important;
   }
 
   .brand,
   .brand-row {
+    display: block !important;
     width: 100% !important;
     max-width: 100% !important;
-    display: block !important;
     padding: 22px var(--rm-mobile-pad) 0 !important;
     margin: 0 0 16px !important;
   }
@@ -142,8 +137,8 @@ img {
   }
 
   .progress {
-    min-width: 0 !important;
     width: 100% !important;
+    min-width: 0 !important;
     text-align: left !important;
     margin-top: 16px !important;
   }
@@ -151,43 +146,215 @@ img {
   .hero,
   .form-area,
   .content,
-  .confirm-panel {
+  .confirm-panel,
+  .bridge-content,
+  .preapply-content,
+  .ready-content {
     width: 100% !important;
     max-width: 100% !important;
-    min-width: 0 !important;
     padding: 24px var(--rm-mobile-pad) !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
 
-  .hero h2,
-  .check-title,
-  .section-heading,
-  .confirm-panel h3 {
+  /* Force every known split hero to become text-over-image on mobile. */
+  .hero-with-image,
+  .ready-hero-split,
+  .preapply-hero,
+  .bridge-hero,
+  .p2-hero,
+  .ownership-hero,
+  .full-ownership-hero,
+  .transparency-hero,
+  .path-hero,
+  .renter-story .p2-hero,
+  .compromise-story .p2-hero,
+  #screen2 .p2-hero,
+  #screenCompromise .p2-hero,
+  #screenBridge .bridge-hero,
+  #screenOwnership .ownership-hero,
+  #screenOwnership .full-ownership-hero,
+  #screenReady .ready-hero-split,
+  #screenReady .ready-hero,
+  #screenPreApply .preapply-hero {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-auto-flow: row !important;
+    width: 100% !important;
     max-width: 100% !important;
-    font-size: clamp(30px, 9vw, 40px) !important;
-    line-height: 1.04 !important;
+    min-width: 0 !important;
+    gap: 18px !important;
+    align-items: start !important;
+    padding: 24px var(--rm-mobile-pad) !important;
+    overflow: visible !important;
+  }
+
+  /* Text side of split heroes. */
+  .hero-copy,
+  .hero-text,
+  .hero-content,
+  .ready-copy,
+  .ready-text,
+  .bridge-copy,
+  .bridge-text,
+  .ownership-copy,
+  .ownership-text,
+  .preapply-copy,
+  .preapply-text,
+  .path-copy,
+  .transparency-copy,
+  .renter-story .hero-copy,
+  .compromise-story .hero-copy,
+  #screen2 .hero-copy,
+  #screenCompromise .hero-copy,
+  #screenBridge .bridge-copy,
+  #screenOwnership .ownership-copy,
+  #screenReady .ready-copy,
+  #screenPreApply .preapply-copy,
+  .hero-with-image > div:first-child,
+  .p2-hero > div:first-child,
+  .ready-hero-split > div:first-child,
+  .bridge-hero > div:first-child,
+  .preapply-hero > div:first-child,
+  .ownership-hero > div:first-child,
+  .full-ownership-hero > div:first-child,
+  .transparency-hero > div:first-child,
+  .path-hero > div:first-child {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Image side of split heroes. */
+  .hero-image-panel,
+  .hero-photo-panel,
+  .image-panel,
+  .photo-panel,
+  .ready-image,
+  .ready-photo,
+  .bridge-image,
+  .ownership-image,
+  .preapply-image,
+  .path-image,
+  .transparency-image,
+  .hero-with-image > div:last-child,
+  .p2-hero > div:last-child,
+  .ready-hero-split > div:last-child,
+  .bridge-hero > div:last-child,
+  .preapply-hero > div:last-child,
+  .ownership-hero > div:last-child,
+  .full-ownership-hero > div:last-child,
+  .transparency-hero > div:last-child,
+  .path-hero > div:last-child {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    margin: 8px 0 0 !important;
+    padding: 0 !important;
+  }
+
+  .hero-image-panel img,
+  .hero-photo-panel img,
+  .image-panel img,
+  .photo-panel img,
+  .ready-image img,
+  .ready-photo img,
+  .bridge-image img,
+  .ownership-image img,
+  .preapply-image img,
+  .path-image img,
+  .transparency-image img,
+  .hero-photo,
+  .hero-with-image img,
+  .p2-hero img,
+  .ready-hero-split img,
+  .bridge-hero img,
+  .preapply-hero img,
+  .ownership-hero img,
+  .full-ownership-hero img,
+  .transparency-hero img,
+  .path-hero img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    max-height: 320px !important;
+    object-fit: cover !important;
+    border-radius: 22px !important;
+  }
+
+  /* Stop headings and hero copy collapsing into single-letter columns. */
+  .screen.active h1,
+  .screen.active h2,
+  .screen.active h3,
+  .hero h2,
+  .hero-copy h2,
+  .ready-copy h2,
+  .bridge-copy h2,
+  .ownership-copy h2,
+  .preapply-copy h2,
+  .path-copy h2,
+  .transparency-copy h2,
+  #screen2 h2,
+  #screenCompromise h2,
+  #screenBridge h2,
+  #screenOwnership h2,
+  #screenReady h2,
+  #screenPreApply h2 {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    white-space: normal !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
+    letter-spacing: -0.045em !important;
+  }
+
+  .screen.active h1,
+  .screen.active .hero-copy h2,
+  .screen.active .ready-copy h2,
+  .screen.active .ownership-copy h2,
+  .screen.active .bridge-copy h2,
+  .screen.active .preapply-copy h2,
+  .screen.active .path-copy h2,
+  .screen.active .transparency-copy h2,
+  #screenReady .hero h2 {
+    font-size: clamp(34px, 10vw, 44px) !important;
+    line-height: 1.02 !important;
+  }
+
+  .screen.active p,
+  .screen.active li,
+  .screen.active span,
+  .screen.active strong,
+  .screen.active label,
+  .hero .promise,
+  .hero-copy p,
+  .ready-copy p,
+  .bridge-copy p,
+  .ownership-copy p,
+  .preapply-copy p,
+  .path-copy p,
+  .transparency-copy p {
+    max-width: 100% !important;
+    white-space: normal !important;
     overflow-wrap: break-word !important;
     word-break: normal !important;
     hyphens: none !important;
   }
 
-  .hero .promise,
-  .check-copy,
-  .fact-title,
-  .card-copy,
-  .choice-copy,
-  .safety,
-  .help,
-  p,
-  span,
-  strong,
-  label {
-    max-width: 100% !important;
-    overflow-wrap: break-word !important;
-    word-break: normal !important;
-  }
-
+  /* Force common grid sections to one column. */
   .fact-strip,
   .fields,
   .radio-row,
@@ -209,81 +376,16 @@ img {
   .confirm-table,
   .bridge,
   .footer-statement,
-  .hero-with-image,
-  .p2-hero,
-  .preapply-hero,
-  .ready-hero-split,
-  #screen2 .p2-hero,
-  #screenCompromise .p2-hero,
-  #screen2 .renter-story .p2-hero,
-  #screenCompromise .compromise-story .p2-hero {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
+  .timeline-steps,
+  .proof-strip,
+  .apply-grid,
+  .preapply-grid {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
     gap: 14px !important;
-  }
-
-  #screen2 .p2-hero,
-  #screenCompromise .p2-hero,
-  #screen2 .renter-story .p2-hero,
-  #screenCompromise .compromise-story .p2-hero {
-    padding: 24px var(--rm-mobile-pad) !important;
-    align-items: start !important;
-  }
-
-  #screen2 .p2-hero .hero-copy,
-  #screenCompromise .p2-hero .hero-copy,
-  #screen2 .p2-hero > div:first-child,
-  #screenCompromise .p2-hero > div:first-child {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-    padding: 0 !important;
-  }
-
-  #screen2 .p2-hero .hero-copy h2,
-  #screenCompromise .p2-hero .hero-copy h2,
-  #screen2 .p2-hero h2,
-  #screenCompromise .p2-hero h2 {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    display: block !important;
-    font-size: clamp(32px, 10vw, 42px) !important;
-    line-height: 1.03 !important;
-    letter-spacing: -0.045em !important;
-    white-space: normal !important;
-    overflow-wrap: normal !important;
-    word-break: normal !important;
-    hyphens: none !important;
-  }
-
-  #screen2 .p2-hero .hero-image-panel,
-  #screenCompromise .p2-hero .hero-image-panel,
-  #screen2 .p2-hero > div:last-child,
-  #screenCompromise .p2-hero > div:last-child {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    grid-column: 1 !important;
-    grid-row: 2 !important;
-    margin: 8px 0 0 !important;
-  }
-
-  #screen2 .p2-hero .hero-image-panel img,
-  #screenCompromise .p2-hero .hero-image-panel img,
-  #screen2 .p2-hero img,
-  #screenCompromise .p2-hero img {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    max-height: 320px !important;
-    object-fit: cover !important;
-    border-radius: 22px !important;
   }
 
   .field.full {
@@ -303,14 +405,17 @@ img {
   .choice-card,
   .bridge,
   .waiting-tax,
-  .confirm-panel {
+  .confirm-panel,
+  .timeline-step,
+  .proof-item,
+  .apply-card,
+  .save-card {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
   }
 
-  .fact-card,
-  .ownership-line {
+  .fact-card {
     grid-template-columns: 52px minmax(0, 1fr) !important;
   }
 
@@ -371,12 +476,6 @@ img {
     max-width: 100% !important;
     overflow-x: auto !important;
   }
-
-  img,
-  svg {
-    max-width: 100% !important;
-    height: auto !important;
-  }
 }
 
 @media (max-width: 390px) {
@@ -384,11 +483,16 @@ img {
     --rm-mobile-pad: 13px;
   }
 
-  .hero h2,
-  .check-title,
-  .section-heading,
-  .confirm-panel h3 {
-    font-size: clamp(28px, 8.8vw, 36px) !important;
+  .screen.active h1,
+  .screen.active .hero-copy h2,
+  .screen.active .ready-copy h2,
+  .screen.active .ownership-copy h2,
+  .screen.active .bridge-copy h2,
+  .screen.active .preapply-copy h2,
+  .screen.active .path-copy h2,
+  .screen.active .transparency-copy h2,
+  #screenReady .hero h2 {
+    font-size: clamp(30px, 9vw, 38px) !important;
   }
 }
 
@@ -413,12 +517,6 @@ img {
 #roadmap-root .rm12-next,
 #roadmap-root .rm12-calc-button {
   touch-action: manipulation;
-}
-
-@media (min-width: 1200px) {
-  .toolbar {
-    max-width: var(--rm-shell-max) !important;
-  }
 }
 
 @media (max-width: 1024px) {
@@ -458,13 +556,6 @@ img {
     font-size: 12px !important;
   }
 
-  #roadmap-root {
-    width: 100% !important;
-    max-width: 100vw !important;
-    margin: 0 !important;
-    overflow-x: hidden !important;
-  }
-
   #roadmap-root,
   #roadmap-root *,
   #roadmap-root *::before,
@@ -472,6 +563,13 @@ img {
     box-sizing: border-box !important;
     max-width: 100% !important;
     min-width: 0 !important;
+  }
+
+  #roadmap-root {
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    overflow-x: hidden !important;
   }
 
   #roadmap-root > section {
@@ -483,22 +581,6 @@ img {
     box-shadow: none !important;
     padding: 22px var(--rm-mobile-pad) 28px !important;
     overflow-x: hidden !important;
-  }
-
-  #roadmap-root [class*='report'],
-  #roadmap-root [class*='body'],
-  #roadmap-root [class*='content'],
-  #roadmap-root [class*='inner'],
-  #roadmap-root [class*='profile'],
-  #roadmap-root [class*='calculator'],
-  #roadmap-root [class*='explanation'],
-  #roadmap-root [class*='accordion'],
-  #roadmap-root [class*='bottom'],
-  #roadmap-root [class*='takeaway'] {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
   }
 
   #roadmap-root [class*='topbar'],
@@ -526,32 +608,6 @@ img {
     gap: 14px !important;
   }
 
-  #roadmap-root [class*='page-label'],
-  #roadmap-root .rm9a-label {
-    min-width: 0 !important;
-    text-align: left !important;
-  }
-
-  #roadmap-root [class*='hero'] {
-    padding: 26px 18px !important;
-    margin-bottom: 18px !important;
-    border-radius: 22px !important;
-  }
-
-  #roadmap-root [class*='hero'] > div,
-  #roadmap-root [class*='title'] {
-    padding-right: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  #roadmap-root [class*='hero']:after,
-  #roadmap-root [class*='image-card'],
-  #roadmap-root [class*='photo'] {
-    opacity: .10 !important;
-    max-width: 100% !important;
-  }
-
   #roadmap-root h1,
   #roadmap-root h2,
   #roadmap-root h3,
@@ -560,28 +616,8 @@ img {
   #roadmap-root span,
   #roadmap-root strong,
   #roadmap-root div {
-    overflow-wrap: anywhere !important;
+    overflow-wrap: break-word !important;
     word-break: normal !important;
-  }
-
-  #roadmap-root h1 {
-    font-size: clamp(34px, 10.5vw, 46px) !important;
-    line-height: .99 !important;
-  }
-
-  #roadmap-root h2 {
-    font-size: clamp(23px, 6.7vw, 30px) !important;
-    line-height: 1.08 !important;
-  }
-
-  #roadmap-root h3 {
-    font-size: clamp(20px, 5.8vw, 27px) !important;
-  }
-
-  #roadmap-root p,
-  #roadmap-root li {
-    font-size: 15.5px !important;
-    line-height: 1.5 !important;
   }
 
   #roadmap-root button,
@@ -605,45 +641,6 @@ img {
     max-width: 100% !important;
     overflow-x: auto !important;
     table-layout: fixed !important;
-  }
-
-  #roadmap-root .rm8-card .value,
-  #roadmap-root .rm9-eq-value,
-  #roadmap-root .rm9a-value,
-  #roadmap-root .rm9a-box strong,
-  #roadmap-root [class*='value'],
-  #roadmap-root [class*='amount'] {
-    white-space: normal !important;
-    max-width: 100% !important;
-  }
-
-  #roadmap-root .rm9a-results,
-  #roadmap-root .rm9-results-grid,
-  #roadmap-root .rm10-qa-grid,
-  #roadmap-root .rm12-accordion {
-    gap: 12px !important;
-  }
-
-  #roadmap-root .rm9a-card,
-  #roadmap-root .rm9a-profile,
-  #roadmap-root .rm9a-calculator,
-  #roadmap-root .rm9a-explanation,
-  #roadmap-root [class*='card'],
-  #roadmap-root [class*='panel'] {
-    border-radius: 18px !important;
-  }
-
-  #roadmap-root .rm9a-inputs,
-  #roadmap-root .rm9a-outputs,
-  #roadmap-root .rm9a-explain,
-  #roadmap-root .rm9a-profile,
-  #roadmap-root [class*='calc-section'] {
-    padding: 18px !important;
-  }
-
-  #roadmap-root .rm9a-slider,
-  #roadmap-root input[type='range'] {
-    min-height: 34px !important;
   }
 }
 
