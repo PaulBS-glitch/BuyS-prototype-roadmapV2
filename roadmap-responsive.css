@@ -157,203 +157,6 @@ img, svg, video, canvas {
     margin-right: 0 !important;
   }
 
-  /* Force every known split hero to become text-over-image on mobile. */
-  .hero-with-image,
-  .ready-hero-split,
-  .preapply-hero,
-  .bridge-hero,
-  .p2-hero,
-  .ownership-hero,
-  .full-ownership-hero,
-  .transparency-hero,
-  .path-hero,
-  .renter-story .p2-hero,
-  .compromise-story .p2-hero,
-  #screen2 .p2-hero,
-  #screenCompromise .p2-hero,
-  #screenBridge .bridge-hero,
-  #screenOwnership .ownership-hero,
-  #screenOwnership .full-ownership-hero,
-  #screenReady .ready-hero-split,
-  #screenReady .ready-hero,
-  #screenPreApply .preapply-hero {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) !important;
-    grid-auto-flow: row !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    gap: 18px !important;
-    align-items: start !important;
-    padding: 24px var(--rm-mobile-pad) !important;
-    overflow: visible !important;
-  }
-
-  /* Text side of split heroes. */
-  .hero-copy,
-  .hero-text,
-  .hero-content,
-  .ready-copy,
-  .ready-text,
-  .bridge-copy,
-  .bridge-text,
-  .ownership-copy,
-  .ownership-text,
-  .preapply-copy,
-  .preapply-text,
-  .path-copy,
-  .transparency-copy,
-  .renter-story .hero-copy,
-  .compromise-story .hero-copy,
-  #screen2 .hero-copy,
-  #screenCompromise .hero-copy,
-  #screenBridge .bridge-copy,
-  #screenOwnership .ownership-copy,
-  #screenReady .ready-copy,
-  #screenPreApply .preapply-copy,
-  .hero-with-image > div:first-child,
-  .p2-hero > div:first-child,
-  .ready-hero-split > div:first-child,
-  .bridge-hero > div:first-child,
-  .preapply-hero > div:first-child,
-  .ownership-hero > div:first-child,
-  .full-ownership-hero > div:first-child,
-  .transparency-hero > div:first-child,
-  .path-hero > div:first-child {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  /* Image side of split heroes. */
-  .hero-image-panel,
-  .hero-photo-panel,
-  .image-panel,
-  .photo-panel,
-  .ready-image,
-  .ready-photo,
-  .bridge-image,
-  .ownership-image,
-  .preapply-image,
-  .path-image,
-  .transparency-image,
-  .hero-with-image > div:last-child,
-  .p2-hero > div:last-child,
-  .ready-hero-split > div:last-child,
-  .bridge-hero > div:last-child,
-  .preapply-hero > div:last-child,
-  .ownership-hero > div:last-child,
-  .full-ownership-hero > div:last-child,
-  .transparency-hero > div:last-child,
-  .path-hero > div:last-child {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    grid-column: 1 !important;
-    grid-row: 2 !important;
-    margin: 8px 0 0 !important;
-    padding: 0 !important;
-  }
-
-  .hero-image-panel img,
-  .hero-photo-panel img,
-  .image-panel img,
-  .photo-panel img,
-  .ready-image img,
-  .ready-photo img,
-  .bridge-image img,
-  .ownership-image img,
-  .preapply-image img,
-  .path-image img,
-  .transparency-image img,
-  .hero-photo,
-  .hero-with-image img,
-  .p2-hero img,
-  .ready-hero-split img,
-  .bridge-hero img,
-  .preapply-hero img,
-  .ownership-hero img,
-  .full-ownership-hero img,
-  .transparency-hero img,
-  .path-hero img {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    height: auto !important;
-    max-height: 320px !important;
-    object-fit: cover !important;
-    border-radius: 22px !important;
-  }
-
-  /* Stop headings and hero copy collapsing into single-letter columns. */
-  .screen.active h1,
-  .screen.active h2,
-  .screen.active h3,
-  .hero h2,
-  .hero-copy h2,
-  .ready-copy h2,
-  .bridge-copy h2,
-  .ownership-copy h2,
-  .preapply-copy h2,
-  .path-copy h2,
-  .transparency-copy h2,
-  #screen2 h2,
-  #screenCompromise h2,
-  #screenBridge h2,
-  #screenOwnership h2,
-  #screenReady h2,
-  #screenPreApply h2 {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    white-space: normal !important;
-    overflow-wrap: normal !important;
-    word-break: normal !important;
-    hyphens: none !important;
-    letter-spacing: -0.045em !important;
-  }
-
-  .screen.active h1,
-  .screen.active .hero-copy h2,
-  .screen.active .ready-copy h2,
-  .screen.active .ownership-copy h2,
-  .screen.active .bridge-copy h2,
-  .screen.active .preapply-copy h2,
-  .screen.active .path-copy h2,
-  .screen.active .transparency-copy h2,
-  #screenReady .hero h2 {
-    font-size: clamp(34px, 10vw, 44px) !important;
-    line-height: 1.02 !important;
-  }
-
-  .screen.active p,
-  .screen.active li,
-  .screen.active span,
-  .screen.active strong,
-  .screen.active label,
-  .hero .promise,
-  .hero-copy p,
-  .ready-copy p,
-  .bridge-copy p,
-  .ownership-copy p,
-  .preapply-copy p,
-  .path-copy p,
-  .transparency-copy p {
-    max-width: 100% !important;
-    white-space: normal !important;
-    overflow-wrap: break-word !important;
-    word-break: normal !important;
-    hyphens: none !important;
-  }
-
   /* Force common grid sections to one column. */
   .fact-strip,
   .fields,
@@ -475,6 +278,194 @@ img, svg, video, canvas {
     width: 100% !important;
     max-width: 100% !important;
     overflow-x: auto !important;
+  }
+
+  /* Hard screen-specific mobile hero reset. This is intentionally placed after all general rules. */
+  #screen2.screen.active .hero,
+  #screenCompromise.screen.active .hero,
+  #screenBridge.screen.active .hero,
+  #screenOwnership.screen.active .hero,
+  #screenReady.screen.active .hero,
+  #screenPreApply.screen.active .hero {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    padding: 24px var(--rm-mobile-pad) !important;
+    overflow: visible !important;
+  }
+
+  #screen2.screen.active .hero-with-image,
+  #screen2.screen.active .p2-hero,
+  #screenCompromise.screen.active .hero-with-image,
+  #screenCompromise.screen.active .p2-hero,
+  #screenBridge.screen.active .hero-with-image,
+  #screenBridge.screen.active .bridge-hero,
+  #screenOwnership.screen.active .hero-with-image,
+  #screenOwnership.screen.active .ownership-hero,
+  #screenReady.screen.active .hero-with-image,
+  #screenReady.screen.active .ready-hero-split,
+  #screenPreApply.screen.active .hero-with-image,
+  #screenPreApply.screen.active .preapply-hero {
+    display: block !important;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    grid-auto-flow: row !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    gap: 0 !important;
+    padding: 24px var(--rm-mobile-pad) !important;
+    overflow: visible !important;
+  }
+
+  #screen2.screen.active .hero-with-image > *,
+  #screen2.screen.active .p2-hero > *,
+  #screenCompromise.screen.active .hero-with-image > *,
+  #screenCompromise.screen.active .p2-hero > *,
+  #screenBridge.screen.active .hero-with-image > *,
+  #screenBridge.screen.active .bridge-hero > *,
+  #screenOwnership.screen.active .hero-with-image > *,
+  #screenOwnership.screen.active .ownership-hero > *,
+  #screenReady.screen.active .hero-with-image > *,
+  #screenReady.screen.active .ready-hero-split > *,
+  #screenPreApply.screen.active .hero-with-image > *,
+  #screenPreApply.screen.active .preapply-hero > * {
+    display: block !important;
+    float: none !important;
+    position: relative !important;
+    transform: none !important;
+    inset: auto !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  #screen2.screen.active .hero-copy,
+  #screenCompromise.screen.active .hero-copy,
+  #screenBridge.screen.active .hero-copy,
+  #screenOwnership.screen.active .hero-copy,
+  #screenReady.screen.active .hero-copy,
+  #screenPreApply.screen.active .hero-copy,
+  #screen2.screen.active .p2-personal,
+  #screenCompromise.screen.active .p2-personal,
+  #screenOwnership.screen.active #ownHeroHeading,
+  #screenReady.screen.active .hero h2 {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    text-align: left !important;
+    white-space: normal !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
+  }
+
+  #screen2.screen.active .p2-personal,
+  #screenCompromise.screen.active .p2-personal {
+    border-radius: 18px !important;
+    margin: 18px 0 16px !important;
+    padding: 14px 16px !important;
+  }
+
+  #screen2.screen.active .hero-copy h2,
+  #screenCompromise.screen.active .hero-copy h2,
+  #screenBridge.screen.active .hero-copy h2,
+  #screenOwnership.screen.active .hero-copy h2,
+  #screenOwnership.screen.active #ownHeroHeading,
+  #screenReady.screen.active .hero h2,
+  #screenPreApply.screen.active .hero-copy h2 {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    white-space: normal !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
+    font-size: clamp(32px, 9vw, 42px) !important;
+    line-height: 1.03 !important;
+    letter-spacing: -0.045em !important;
+  }
+
+  #screen2.screen.active .hero-copy p,
+  #screen2.screen.active .hero-copy h3,
+  #screenCompromise.screen.active .hero-copy p,
+  #screenCompromise.screen.active .hero-copy h3,
+  #screenBridge.screen.active .hero-copy p,
+  #screenBridge.screen.active .hero-copy h3,
+  #screenOwnership.screen.active .hero-copy p,
+  #screenOwnership.screen.active .hero-copy h3,
+  #screenReady.screen.active .hero p,
+  #screenReady.screen.active .hero h3,
+  #screenPreApply.screen.active .hero-copy p,
+  #screenPreApply.screen.active .hero-copy h3 {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    hyphens: none !important;
+    font-size: 16px !important;
+    line-height: 1.42 !important;
+  }
+
+  #screen2.screen.active .hero-image-panel,
+  #screen2.screen.active .hero-photo-panel,
+  #screenCompromise.screen.active .hero-image-panel,
+  #screenCompromise.screen.active .hero-photo-panel,
+  #screenBridge.screen.active .hero-image-panel,
+  #screenBridge.screen.active .hero-photo-panel,
+  #screenOwnership.screen.active .hero-image-panel,
+  #screenOwnership.screen.active .hero-photo-panel,
+  #screenReady.screen.active .hero-image-panel,
+  #screenReady.screen.active .hero-photo-panel,
+  #screenReady.screen.active .final-trust-visual,
+  #screenPreApply.screen.active .hero-image-panel,
+  #screenPreApply.screen.active .preapply-photo {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 20px 0 0 !important;
+    padding: 0 !important;
+    border-radius: 22px !important;
+    overflow: hidden !important;
+  }
+
+  #screen2.screen.active .hero-image-panel img,
+  #screen2.screen.active .hero-photo,
+  #screenCompromise.screen.active .hero-image-panel img,
+  #screenCompromise.screen.active .hero-photo,
+  #screenBridge.screen.active .hero-image-panel img,
+  #screenBridge.screen.active .hero-photo,
+  #screenOwnership.screen.active .hero-image-panel img,
+  #screenOwnership.screen.active .hero-photo,
+  #screenReady.screen.active .hero-image-panel img,
+  #screenReady.screen.active .hero-photo,
+  #screenReady.screen.active .final-trust-visual img,
+  #screenPreApply.screen.active .hero-image-panel img,
+  #screenPreApply.screen.active .preapply-photo img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    max-height: 320px !important;
+    object-fit: cover !important;
+    border-radius: 22px !important;
   }
 }
 
