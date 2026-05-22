@@ -20,6 +20,17 @@
 (function () {
   const STORAGE_KEY = "BuySoonerRoadmapData";
 
+  function loadResponsiveStylesheet() {
+    if (document.getElementById("roadmap-responsive-style")) return;
+    const link = document.createElement("link");
+    link.id = "roadmap-responsive-style";
+    link.rel = "stylesheet";
+    link.href = "roadmap-responsive.css?v=20260521-41";
+    document.head.appendChild(link);
+  }
+
+  loadResponsiveStylesheet();
+
   function text(value) {
     return String(value == null ? "" : value).trim();
   }
