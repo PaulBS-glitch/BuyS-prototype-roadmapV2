@@ -82,12 +82,19 @@ img {
 }
 
 @media (max-width: 700px) {
+  html,
   body {
     width: 100% !important;
+    max-width: 100% !important;
     min-height: 100svh !important;
+    margin: 0 !important;
     padding: 0 !important;
     overflow-x: hidden !important;
     background: #f7fbfb !important;
+  }
+
+  body {
+    position: relative !important;
   }
 
   .toolbar {
@@ -95,7 +102,7 @@ img {
     top: 0 !important;
     z-index: 2000 !important;
     width: 100% !important;
-    max-width: none !important;
+    max-width: 100vw !important;
     margin: 0 !important;
     padding: 11px 14px !important;
     border-bottom: 1px solid rgba(215,229,228,.9) !important;
@@ -112,18 +119,45 @@ img {
 
   #roadmap-root {
     width: 100% !important;
-    max-width: none !important;
+    max-width: 100vw !important;
     margin: 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  #roadmap-root,
+  #roadmap-root *,
+  #roadmap-root *::before,
+  #roadmap-root *::after {
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
   }
 
   #roadmap-root > section {
     width: 100% !important;
-    max-width: none !important;
+    max-width: 100vw !important;
     min-height: calc(100svh - 65px) !important;
     margin: 0 !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     padding: 22px var(--rm-mobile-pad) 28px !important;
+    overflow-x: hidden !important;
+  }
+
+  #roadmap-root [class*='report'],
+  #roadmap-root [class*='body'],
+  #roadmap-root [class*='content'],
+  #roadmap-root [class*='inner'],
+  #roadmap-root [class*='profile'],
+  #roadmap-root [class*='calculator'],
+  #roadmap-root [class*='explanation'],
+  #roadmap-root [class*='accordion'],
+  #roadmap-root [class*='bottom'],
+  #roadmap-root [class*='takeaway'] {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 
   #roadmap-root [class*='topbar'],
@@ -147,7 +181,7 @@ img {
   #roadmap-root .rm8-process-row,
   #roadmap-root .rm8-situation {
     display: grid !important;
-    grid-template-columns: 1fr !important;
+    grid-template-columns: minmax(0, 1fr) !important;
     gap: 14px !important;
   }
 
@@ -158,29 +192,49 @@ img {
   }
 
   #roadmap-root [class*='hero'] {
-    padding: 26px 20px !important;
+    padding: 26px 18px !important;
     margin-bottom: 18px !important;
     border-radius: 22px !important;
+  }
+
+  #roadmap-root [class*='hero'] > div,
+  #roadmap-root [class*='title'] {
+    padding-right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   #roadmap-root [class*='hero']:after,
   #roadmap-root [class*='image-card'],
   #roadmap-root [class*='photo'] {
-    opacity: .12 !important;
+    opacity: .10 !important;
+    max-width: 100% !important;
+  }
+
+  #roadmap-root h1,
+  #roadmap-root h2,
+  #roadmap-root h3,
+  #roadmap-root p,
+  #roadmap-root li,
+  #roadmap-root span,
+  #roadmap-root strong,
+  #roadmap-root div {
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
   }
 
   #roadmap-root h1 {
-    font-size: clamp(36px, 11vw, 48px) !important;
-    line-height: .98 !important;
+    font-size: clamp(34px, 10.5vw, 46px) !important;
+    line-height: .99 !important;
   }
 
   #roadmap-root h2 {
-    font-size: clamp(24px, 7vw, 32px) !important;
+    font-size: clamp(23px, 6.7vw, 30px) !important;
     line-height: 1.08 !important;
   }
 
   #roadmap-root h3 {
-    font-size: clamp(21px, 6vw, 28px) !important;
+    font-size: clamp(20px, 5.8vw, 27px) !important;
   }
 
   #roadmap-root p,
@@ -205,8 +259,21 @@ img {
 
   #roadmap-root table,
   #roadmap-root .rm-table {
+    display: block !important;
     width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
     table-layout: fixed !important;
+  }
+
+  #roadmap-root .rm8-card .value,
+  #roadmap-root .rm9-eq-value,
+  #roadmap-root .rm9a-value,
+  #roadmap-root .rm9a-box strong,
+  #roadmap-root [class*='value'],
+  #roadmap-root [class*='amount'] {
+    white-space: normal !important;
+    max-width: 100% !important;
   }
 
   #roadmap-root .rm9a-results,
@@ -249,7 +316,7 @@ img {
   }
 
   #roadmap-root h1 {
-    font-size: clamp(32px, 10.5vw, 42px) !important;
+    font-size: clamp(31px, 10vw, 40px) !important;
   }
 
   #roadmap-root > section {
