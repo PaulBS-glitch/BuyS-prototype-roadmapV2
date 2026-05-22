@@ -1,0 +1,278 @@
+/* BuySooner Roadmap responsive layer
+   Purpose: make the roadmap fill the available laptop and mobile screen cleanly without changing page logic. */
+
+:root {
+  --rm-shell-max: 1120px;
+  --rm-mobile-pad: 16px;
+}
+
+html {
+  width: 100%;
+  min-height: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+#roadmap-root {
+  width: 100%;
+  max-width: var(--rm-shell-max) !important;
+}
+
+#roadmap-root > section {
+  width: 100% !important;
+  max-width: var(--rm-shell-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  min-height: calc(100vh - 104px) !important;
+  min-height: calc(100svh - 104px) !important;
+}
+
+#roadmap-root button,
+#roadmap-root .rm-btn,
+#roadmap-root .rm9-btn,
+#roadmap-root .rm9a-btn,
+#roadmap-root .rm10-btn,
+#roadmap-root .rm12-next,
+#roadmap-root .rm12-calc-button {
+  touch-action: manipulation;
+}
+
+img {
+  max-width: 100%;
+}
+
+@media (min-width: 1200px) {
+  body {
+    padding: 24px !important;
+  }
+
+  .toolbar {
+    max-width: var(--rm-shell-max) !important;
+  }
+
+  #roadmap-root > section {
+    min-height: calc(100vh - 90px) !important;
+    min-height: calc(100svh - 90px) !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  body {
+    padding: 18px !important;
+  }
+
+  .toolbar,
+  #roadmap-root {
+    max-width: 100% !important;
+  }
+
+  #roadmap-root > section {
+    border-radius: 22px !important;
+    padding: 30px 24px !important;
+  }
+
+  #roadmap-root [class*='hero'] {
+    min-height: auto !important;
+  }
+}
+
+@media (max-width: 700px) {
+  body {
+    width: 100% !important;
+    min-height: 100svh !important;
+    padding: 0 !important;
+    overflow-x: hidden !important;
+    background: #f7fbfb !important;
+  }
+
+  .toolbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 2000 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 11px 14px !important;
+    border-bottom: 1px solid rgba(215,229,228,.9) !important;
+    background: rgba(255,255,255,.96) !important;
+    backdrop-filter: blur(8px) !important;
+    font-size: 14px !important;
+  }
+
+  .toolbar button {
+    min-height: 42px !important;
+    padding: 10px 13px !important;
+    font-size: 12px !important;
+  }
+
+  #roadmap-root {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+
+  #roadmap-root > section {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: calc(100svh - 65px) !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 22px var(--rm-mobile-pad) 28px !important;
+  }
+
+  #roadmap-root [class*='topbar'],
+  #roadmap-root [class*='actions'],
+  #roadmap-root [class*='hero'],
+  #roadmap-root [class*='split'],
+  #roadmap-root [class*='situation'],
+  #roadmap-root [class*='track-grid'],
+  #roadmap-root [class*='drivers'],
+  #roadmap-root [class*='deal'],
+  #roadmap-root [class*='input-grid'],
+  #roadmap-root [class*='results-grid'],
+  #roadmap-root [class*='qa-grid'],
+  #roadmap-root [class*='process-row'],
+  #roadmap-root [class*='bottom-row'],
+  #roadmap-root [class*='trade'],
+  #roadmap-root .rm9a-grid,
+  #roadmap-root .rm9a-results,
+  #roadmap-root .rm9a-deal,
+  #roadmap-root .rm9-equation,
+  #roadmap-root .rm8-process-row,
+  #roadmap-root .rm8-situation {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  #roadmap-root [class*='page-label'],
+  #roadmap-root .rm9a-label {
+    min-width: 0 !important;
+    text-align: left !important;
+  }
+
+  #roadmap-root [class*='hero'] {
+    padding: 26px 20px !important;
+    margin-bottom: 18px !important;
+    border-radius: 22px !important;
+  }
+
+  #roadmap-root [class*='hero']:after,
+  #roadmap-root [class*='image-card'],
+  #roadmap-root [class*='photo'] {
+    opacity: .12 !important;
+  }
+
+  #roadmap-root h1 {
+    font-size: clamp(36px, 11vw, 48px) !important;
+    line-height: .98 !important;
+  }
+
+  #roadmap-root h2 {
+    font-size: clamp(24px, 7vw, 32px) !important;
+    line-height: 1.08 !important;
+  }
+
+  #roadmap-root h3 {
+    font-size: clamp(21px, 6vw, 28px) !important;
+  }
+
+  #roadmap-root p,
+  #roadmap-root li {
+    font-size: 15.5px !important;
+    line-height: 1.5 !important;
+  }
+
+  #roadmap-root button,
+  #roadmap-root .rm-btn,
+  #roadmap-root .rm9-btn,
+  #roadmap-root .rm9a-btn,
+  #roadmap-root .rm10-btn,
+  #roadmap-root .rm12-next,
+  #roadmap-root .rm12-calc-button {
+    width: 100% !important;
+    min-height: 50px !important;
+    padding: 14px 18px !important;
+    font-size: 15px !important;
+    white-space: normal !important;
+  }
+
+  #roadmap-root table,
+  #roadmap-root .rm-table {
+    width: 100% !important;
+    table-layout: fixed !important;
+  }
+
+  #roadmap-root .rm9a-results,
+  #roadmap-root .rm9-results-grid,
+  #roadmap-root .rm10-qa-grid,
+  #roadmap-root .rm12-accordion {
+    gap: 12px !important;
+  }
+
+  #roadmap-root .rm9a-card,
+  #roadmap-root .rm9a-profile,
+  #roadmap-root .rm9a-calculator,
+  #roadmap-root .rm9a-explanation,
+  #roadmap-root [class*='card'],
+  #roadmap-root [class*='panel'] {
+    border-radius: 18px !important;
+  }
+
+  #roadmap-root .rm9a-inputs,
+  #roadmap-root .rm9a-outputs,
+  #roadmap-root .rm9a-explain,
+  #roadmap-root .rm9a-profile,
+  #roadmap-root [class*='calc-section'] {
+    padding: 18px !important;
+  }
+
+  #roadmap-root .rm9a-slider,
+  #roadmap-root input[type='range'] {
+    min-height: 34px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  :root {
+    --rm-mobile-pad: 13px;
+  }
+
+  .toolbar {
+    gap: 8px !important;
+  }
+
+  #roadmap-root h1 {
+    font-size: clamp(32px, 10.5vw, 42px) !important;
+  }
+
+  #roadmap-root > section {
+    padding-top: 18px !important;
+  }
+}
+
+@media print {
+  body {
+    padding: 0 !important;
+    background: #fff !important;
+  }
+
+  .toolbar {
+    display: none !important;
+  }
+
+  #roadmap-root,
+  #roadmap-root > section {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 100vh !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+}
