@@ -25,7 +25,7 @@
     const link = document.createElement("link");
     link.id = "roadmap-responsive-style";
     link.rel = "stylesheet";
-    link.href = "roadmap-responsive.css?v=20260521-44";
+    link.href = "roadmap-responsive.css?v=20260521-45";
     document.head.appendChild(link);
   }
 
