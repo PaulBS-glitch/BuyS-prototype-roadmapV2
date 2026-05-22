@@ -1,4 +1,4 @@
-/* Page 9 refinement layer: hero, refinance copy, assumptions readability and tracking layout. */
+/* Page 9 refinement layer: hero, refinance copy, assumptions readability, tracking layout and calculator modal UX. */
 (function(){
   function injectPage9RefinementStyles(){
     if(document.getElementById('roadmap-page9-refinement-style')) return;
@@ -79,9 +79,116 @@
       .rm9-track p{
         font-size:15.2px!important;
       }
+
+      /* Calculator modal refinement */
+      .rm9-modal-body{
+        display:grid!important;
+        gap:20px!important;
+      }
+      .rm9-profile-block{
+        background:linear-gradient(135deg,#fff 0%,#f7fbfb 72%,#eef8f7 100%)!important;
+        border:1px solid #d7e5e4!important;
+        border-radius:24px!important;
+        padding:20px!important;
+        box-shadow:0 14px 32px rgba(12,51,88,.07)!important;
+      }
+      .rm9-profile-block .rm9-modal-hero{
+        margin-bottom:14px!important;
+        grid-template-columns:1.12fr .88fr!important;
+        align-items:stretch!important;
+      }
+      .rm9-profile-block .rm9-modal-title{
+        box-shadow:none!important;
+        background:rgba(255,255,255,.88)!important;
+      }
+      .rm9-profile-block .rm9-modal-title h2{
+        font-size:42px!important;
+      }
+      .rm9-profile-block .rm9-modal-photo{
+        min-height:210px!important;
+        box-shadow:none!important;
+      }
+      .rm9-profile-block .rm9-deal-strip{
+        margin-bottom:0!important;
+        box-shadow:none!important;
+        background:rgba(255,255,255,.90)!important;
+      }
+      .rm9-calculator{
+        border-radius:24px!important;
+        border:1px solid #d7e5e4!important;
+        background:#fff!important;
+        box-shadow:0 16px 34px rgba(12,51,88,.08)!important;
+      }
+      .rm9-inputs{
+        border-bottom:1px solid rgba(8,122,120,.18)!important;
+        background:#fff!important;
+      }
+      .rm9-inputs h3{
+        margin-bottom:4px!important;
+      }
+      .rm9-outputs{
+        background:linear-gradient(180deg,#fff 0%,#f7fbfb 100%)!important;
+      }
+      .rm9-results-grid{
+        grid-template-columns:repeat(4,minmax(0,1fr))!important;
+        gap:12px!important;
+        align-items:stretch!important;
+      }
+      .rm9-result-box{
+        min-height:98px!important;
+        padding:15px 14px!important;
+        background:#fff!important;
+        border-color:#d7e5e4!important;
+      }
+      .rm9-result-box.is-key{
+        background:#eaf6f5!important;
+        border-color:rgba(8,122,120,.34)!important;
+        box-shadow:0 10px 22px rgba(8,122,120,.08)!important;
+      }
+      .rm9-result-box.is-key .rm9-result-label{
+        color:#087a78!important;
+        letter-spacing:.065em!important;
+      }
+      .rm9-result-box.is-key .rm9-result-value{
+        color:#087a78!important;
+        font-size:27px!important;
+        font-weight:950!important;
+      }
+      .rm9-result-box:not(.is-key) .rm9-result-value{
+        font-size:20px!important;
+        font-weight:820!important;
+      }
+      .rm9-answer{
+        border:0!important;
+        background:linear-gradient(135deg,#eaf6f5 0%,#f4fbfa 100%)!important;
+        border:1px solid rgba(8,122,120,.26)!important;
+        border-radius:18px!important;
+        padding:18px 20px!important;
+        margin:0 0 18px!important;
+      }
+      .rm9-answer h3,
+      .rm9-answer .green{
+        color:#087a78!important;
+        font-size:34px!important;
+        line-height:1!important;
+        font-weight:950!important;
+        letter-spacing:-.045em!important;
+      }
+      .rm9-explanation{
+        padding:24px!important;
+        border-radius:22px!important;
+      }
+      .rm9-explanation h3{
+        margin-bottom:14px!important;
+      }
+      .rm9-explanation p{
+        font-weight:500!important;
+      }
       @media(max-width:900px){
         .rm9-hero{min-height:auto!important;padding:30px 24px!important;}
         .rm9-hero:after{opacity:.16!important;}
+        .rm9-profile-block .rm9-modal-hero,
+        .rm9-results-grid{grid-template-columns:1fr!important;}
       }
     `;
     document.head.appendChild(style);
@@ -110,6 +217,55 @@
     }
   }
 
+  function enhanceCalculatorModal(){
+    var modal=document.querySelector('.rm9-modal-card');
+    if(!modal || modal.dataset.rm9Enhanced==='true') return;
+    modal.dataset.rm9Enhanced='true';
+
+    var body=modal.querySelector('.rm9-modal-body');
+    var hero=modal.querySelector('.rm9-modal-hero');
+    var deal=modal.querySelector('.rm9-deal-strip');
+    if(body && hero && deal){
+      var profile=document.createElement('section');
+      profile.className='rm9-profile-block';
+      body.insertBefore(profile, hero);
+      profile.appendChild(hero);
+      profile.appendChild(deal);
+    }
+
+    var grid=modal.querySelector('.rm9-results-grid');
+    if(grid){
+      var boxes=Array.prototype.slice.call(grid.querySelectorAll('.rm9-result-box'));
+      var keyLabels=['New repayment','New bank loan','Loan ratio','Your home equity'];
+      var key=[];
+      var support=[];
+      boxes.forEach(function(box){
+        var labelEl=box.querySelector('.rm9-result-label');
+        var label=labelEl ? labelEl.textContent.trim() : '';
+        if(keyLabels.indexOf(label)!==-1){
+          box.classList.add('is-key');
+          key.push(box);
+        }else{
+          support.push(box);
+        }
+      });
+      key.concat(support).forEach(function(box){grid.appendChild(box);});
+    }
+
+    var calc=modal.querySelector('.rm9-calculator');
+    var answer=modal.querySelector('.rm9-answer');
+    var explanation=modal.querySelector('.rm9-explanation');
+    if(answer && explanation && answer.parentElement!==explanation){
+      explanation.insertBefore(answer, explanation.firstChild);
+    }
+  }
+
+  function observeCalculatorModal(){
+    if(window.__rm9ModalObserver) return;
+    window.__rm9ModalObserver=new MutationObserver(function(){enhanceCalculatorModal();});
+    window.__rm9ModalObserver.observe(document.body,{childList:true,subtree:true});
+  }
+
   function wrapWhenReady(){
     if(typeof window.renderRoadmapPage9!=='function'){
       setTimeout(wrapWhenReady,30);
@@ -121,11 +277,13 @@
       original(data,root);
       injectPage9RefinementStyles();
       postProcessPage9(root);
-      setTimeout(function(){postProcessPage9(root);},0);
+      observeCalculatorModal();
+      setTimeout(function(){postProcessPage9(root);enhanceCalculatorModal();},0);
     };
     window.renderRoadmapPage9.__page9Refined=true;
   }
 
   injectPage9RefinementStyles();
+  observeCalculatorModal();
   wrapWhenReady();
 })();
